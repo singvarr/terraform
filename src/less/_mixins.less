@@ -1,0 +1,123 @@
+//PALETTE
+@btn-color: #43AC4E;
+@btn-color-hover: #33a33e;
+@bg-color: #333;
+
+@header: #111417;
+@footer-text: #bec1c2;
+
+@text-col: #111;
+@white: white;
+
+
+//FONTS
+@main-font: 'bebas-neue-regular';
+@subs-font: 'Open Sans', sans-serif;
+
+
+//VERTICAL ALIGN
+.v-align() {
+    font-size: 0;
+
+    &::before {
+        display: inline-block;
+        content: "";
+        height: 100%;
+        vertical-align: middle;
+    }
+}
+
+.clearfix() {
+    &::after {
+        display: table;
+        content: '';
+        clear: both;
+    }
+}
+
+.text(@font-family, @color: @text-col) {
+    font-family: @font-family;
+    color: @color;
+}
+
+.input(@w, @h, @f-size, @pad, @b-rad: 5px) {
+    width: @w;
+    height: @h;
+    font-size: @f-size;
+    border: 1px solid #cccccc;
+    border-radius: @b-rad;
+    outline: none;
+    padding: @pad;
+    box-sizing: border-box;
+    text-transform: uppercase;
+}
+
+//BUTTONS
+._btn-reset() {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.button(@w, @h, @f-size, @bg-col: @btn-color, @b-rad: 5px) {
+    ._btn-reset();
+    width: @w;
+    height: @h;
+    background-color: @bg-col;
+    font-size: @f-size;
+    border-radius: @b-rad;
+    font-weight: 700;
+
+    &:hover {
+        background-color: @btn-color-hover;
+    }
+}
+
+.btn-blind(@f-size, @f-family: @subs-font) {
+    ._btn-reset();
+    background-color: transparent;
+    text-decoration: underline;
+    font-size: @f-size;
+    font-family: @f-family;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+.flaticon(@f-size, @color: @white) {
+    ._btn-reset();
+    background-color: transparent;
+    
+    &::before {
+        font-size: @f-size;
+        color: @color;
+    }
+}
+
+//Animation
+.pulse() {
+    transition: transform 200ms cubic-bezier(0.215,  0.610, 0.355, 1.000); //out-cubic
+    position: relative;
+
+    &::after {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transition: all 500ms ease-out;
+            border-radius: 5px;
+    }
+
+    &:hover, &:active{
+        transform: scale(1.11);
+
+        &::after {
+            transform: scaleX(1.2) scaleY(1.5);
+            opacity: 0;       
+            border: solid 1px @btn-color;
+            background-color: @btn-color;
+        }
+    }    
+}
