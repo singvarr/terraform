@@ -1,14 +1,4 @@
 @import url("_mixins.less");
-.wrapper {
-    margin: 0 auto;
-}
-
-h2, h3 {
-    .text(@main-font);
-    text-align: center;
-    font-weight: 700;
-}
-
 header {
     position: fixed;
     top: 0;
@@ -18,6 +8,10 @@ header {
     height: 60px;
     background-color: @header;
     text-align: center;
+
+    nav:not(#mobile-menu) {
+        height: 60px;
+    }
 
     .logo-container {
         position: relative;
@@ -63,17 +57,19 @@ main {
         background-image: radial-gradient(circle farthest-corner at 49% -34%, #17232c 25%, #111416);
         box-shadow: 0 1px 26px 4px rgba(0, 0, 0, .7);
         
-        h2 {
-            margin: 0 auto;
-            width: 300px;
-            line-height: 80px;
-            color: @white;
-            background: url('../assets/romb.png') 50% -30px no-repeat;
-            background-size: 95%;
-        }
-
-        .services-list {
+        .wrapper {
             .clearfix();
+
+            h2 {
+                position: relative;
+                margin: 0 auto;
+                padding-bottom: 15px;
+                width: 300px;
+                line-height: 80px;
+                color: @white;
+                background: url('../assets/romb.png') 50% -30px no-repeat;
+                background-size: 95%;
+            }
             
             .service {
                 float: left;
@@ -93,7 +89,6 @@ main {
                         bottom: 0;
                         right: 0;
                         width: 80%;
-                        max-height: 100%;
                         transition: all 0.5s ease;
                     }
                 }
@@ -120,18 +115,18 @@ main {
         }
     }
 
-    #about .wrapper {
+    #about {
         .clearfix();
 
         .team-member {
             float: left;
+            margin-top: 20px;
             text-align: center;
 
             &-photo {
                 margin-bottom: 10px;
                 padding: 0 20px;
                 box-sizing: border-box;
-                text-align: center;
                 
                 img {
                     max-width: 100%;
@@ -162,21 +157,39 @@ main {
                 background: url('../assets/romb.png') 50% 50% no-repeat;
                 background-size: contain;
                 color: @white;
-            }
 
-            .gallery {
+            }
+            
+            .gallery-container {
+            	position: relative;
                 margin-bottom: 20px;
                 overflow: hidden;
-                border-radius: 5px;
-                    
-                &:hover {
+
+	            &:hover {
+                    .gallery-title {
+                        opacity: 1; 
+                    }
+
                     img:first-child {
                         filter: grayscale(100%);
-                        transform: scale(1.5);
+                        transform: scale(1.5); 
+                        border-radius: 5px;
                     }
-                }                  
-                    
-                a {                    
+                } 
+
+	            .gallery-title {
+	                position: absolute;
+	                top: 50%;
+	                left: 50%;
+	                z-index: 100;
+	                text-align: center;
+	                .text(@main-font, @white);
+	                opacity: 0;
+	                transform: translate(-50%, -50%);
+	                transition: opacity 0.5s ease;
+	            }
+	            
+	            .gallery a {               
                     &:not(:first-child) {
                         display: none;
                     }
@@ -186,12 +199,22 @@ main {
                         height: auto;
                         border-radius: 5px;
                         transition: all 800ms ease;  
-                    }                     
-                }
+                    }
+	            }	
             }
 
-            .load-more {
+            .view-more {
+                display: block;
+                clear: both;
+                margin: 0 auto;
+                width: 250px;
                 line-height: 50px;
+                vertical-align: middle;
+                border-radius: 5px;
+                background-color: @btn-color;
+                .text(@main-font, @white);
+                font-size: 25px;
+                .pulse();
             }
         }
     }
@@ -199,27 +222,23 @@ main {
     .counters {
         background-color: #141c22;
         box-shadow: 0 0 22px 1px rgba(0, 0, 0, .7);
-
-        .wrapper {
-            .clearfix();
-            
-            .counter {
-                .v-align();
-                text-align: center;
+       
+        .counter {
+            .v-align();
+            text-align: center;
                 
-                .odometer, &-text {
-                    display: inline-block;
-                    vertical-align: middle;
-                }
+            .odometer, &-text {
+                display: inline-block;
+                vertical-align: middle;
+            }
 
-                &-text {
-                    width: 160px;
-                    margin-left: 15px;
-                    text-align: left;
-                    .text(@subs-font, @white);
-                    font-size: 18px;
-                    text-transform: uppercase;
-                }
+            &-text {
+               	width: 160px;
+                margin-left: 15px;
+               	text-align: left;
+                .text(@subs-font, @white);
+                font-size: 18px;
+                text-transform: uppercase;
             }
         }
     }
@@ -232,28 +251,27 @@ main {
         .partners-list {
             .clearfix();
             padding-bottom: 10px;
+            text-align: center;
             
-            .partner {
+            .partner { 
                 &-logo {
                     line-height: 100px;
-                    text-align: center;
                     
                     img {
                         width: 120px;
                         height: auto;
                         max-height: 100px;
-                        vertical-align: middle;                   
+                        vertical-align: middle;
                         filter: grayscale(100%);
                         transition: filter 500ms ease;
-                    
+                        
                         &:hover {
                             filter: none;
                         }
-                    }   
+                    }
                 }
 
                 &-name {
-                    text-align: center;
                     font-size: 16px;
                     .text(@subs-font);
                 }
@@ -267,8 +285,8 @@ main {
 
     .reviews {
         #add-review {
-            margin-bottom: 10px;
             .btn-blind(16px);
+            margin-bottom: 10px;
         }
 
         #reviews-list {
@@ -279,6 +297,7 @@ main {
                     text-align: center;
     
                     img {
+                        margin: 0 auto;
                         max-width: 100%;
                         max-height: 100px;
                         height: auto;
@@ -287,11 +306,11 @@ main {
 
                 &-post {
                     &-title {
+                        padding-bottom: 5px;
                         text-align: left;
                         .text(@main-font);
                         font-size: 22px;
-                        font-weight: 700;
-                        padding-bottom: 5px;
+                        
                     }
 
                     &-subtitle {
@@ -325,14 +344,10 @@ footer {
             } 
 
             #show-map {
-                padding: 0;
-                border: none;
-                outline: none;
-                background-color: transparent;
+                .btn-blind(14px);
+                display: inline-block;
                 .text(@subs-font, @footer-text);
-                font-size: 14px;
-                text-decoration: underline;     
-            } 
+            }
         }
         
         .about-company {
@@ -405,14 +420,11 @@ footer {
         }
     }
 
-    .copyright p {
+    .copyright {
+        padding: 10px 0;
         text-align: center;
         .text(@subs-font, @footer-text);
         font-size: 10px;
-
-        a {
-            color: @footer-text;
-        }
     }
 }
 
@@ -469,34 +481,33 @@ footer {
     right: 5%;
     z-index: 100;
     padding: 20px;
-    background-color: #2f4e62;
     border-radius: 5px;
-
+    background-color: #2f4e62;
+    
     .close {
+    	position: absolute;
+    	top: 5px;
+    	right: 5px;
         .flaticon(20px);
     }
 
-    form {
-        margin: 0 auto;
-        text-align: center;
+    h2 {
+        color: @white;
+        margin: 10px 0 20px;
+    }
 
-        h2 {
-            color: @white;
-            margin: 5px 0 30px;
-        }
-
-        input {
-            .input(200px, 45px, 15px, 0 10px);
-            .text(@subs-font);
-            margin-bottom: 20px;
-        }
+    input {
+    	display: block;
+        .input(200px, 45px, 15px, 0 10px);
+        .text(@subs-font);
+        margin-bottom: 10px;
+    }
         
-        button {
-            .button(150px, 40px, 20px);
-            .text(@main-font, @white);
-            .pulse();
-            margin-bottom: 20px;
-        }
+    button[type='submit'] {
+       .button(150px, 40px, 20px);
+       .text(@main-font, @white);
+       .pulse();
+        margin-bottom: 10px;
     }
 }
 
@@ -528,11 +539,14 @@ footer {
     }
 
     .service-plan {
+        text-align: center;
+
         h3 {
             color: @white;
         }
         
         li {
+            padding: 15px 0;
             .text(@subs-font, @white);
             font-size: 15px;
         }
@@ -559,6 +573,7 @@ footer {
     z-index: 10000;
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
     .v-align();
     text-align: center;
     background: url('../assets/cell.png') repeat;
@@ -581,17 +596,17 @@ footer {
 
         input, textarea {
             display: block;
-            margin: 0 auto 20px;
-            max-width: 400px;
+            margin-bottom: 15px;
             .text(@subs-font);
+
         }
             
         input {
-            .input(90%, 40px, 18px, 0 10px);
+            .input(300px, 40px, 18px, 0 10px);
         }
 
         textarea {
-            .input(90%, 250px, 18px, 10px);
+            .input(300px, 250px, 18px, 10px);
         }
 
         button {
@@ -625,6 +640,16 @@ footer {
             transform: translateX(-50%);
         }
     }
+
+.wrapper {
+    margin: 0 auto;
+}
+
+h2, h3 {
+    .text(@main-font);
+    text-align: center;
+    font-weight: 700;
+}
 
 .load-more {
     display: block;
