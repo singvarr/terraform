@@ -75,7 +75,7 @@ gulp.task('html', () => {
 		appCSS: gulp.src(['dist/css/**/*.min.css', 'dist/fonts/**/*.css'], {read: false})
 	}
 
-	return gulp.src('./src/*.html')
+	return gulp.src('./src/templates/*.html', {base: './src/templates'})
 		.pipe(inject(streams.vendorCSS, {
 			name: 'vendorCSS',
 			relative: true

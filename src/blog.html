@@ -36,7 +36,7 @@
             </nav>
             <button id="sandwich" class="flaticon-menu-button-of-three-horizontal-lines"></button>  
         </div>
-        <nav id="mobileMenu">
+        <nav id="mobile-menu">
             <button class="flaticon-delete close"></button>
             <ul>
                 <li><a href="#about">О компании</a></li>
@@ -166,13 +166,11 @@
                         <span class="post-views">11000 просмотров</span>
                     </div>
                 </a>
-            <button class="load-more">Показать больше</button>
-                
-                
+            <button class="load-more">Показать больше</button>   
         </section>
         <aside class="sidebar">
             <div class="widget">
-                <form action="">
+                <form>
                     <h3 class="widget-title">Поиск</h3>
                     <input type="text">
                     <button type="submit">Поиск</button>
@@ -221,10 +219,10 @@
                 </div>
             </div>
             <div class="dive">
-                <img class='whale' src='./assets/whale.png'>
-                <button id='btnDive'>Погружаемся</button>
-                <div class="dive-form">
-                    <form class="footer-form">
+                <img id='whale' src='assets/whale.png'>
+                <button id='btn-dive'>Погружаемся</button>
+                <div class="dive-form-container">
+                    <form id="dive-form">
                         <input 
                             type="text"
                             placeholder="Введите ваше имя"
@@ -245,16 +243,17 @@
     </footer>
     <button id="goUp" class="flaticon-arrow-up"></button>
     <button id="callbackBtn" class="flaticon-phone-symbol-of-an-auricular-inside-a-circle"></button>
-    <div id="callbackForm">
-        <button class="flaticon-delete close"></button>   
-        <form>
-            <h2>Обратная связь</h2>
-            <input name="name" placeholder="Введите ваше имя" type="text">
-            <input name="email" placeholder="Введите ваш номер телефона"
-                required="required" type="email">
-            <button type="submit" id='sendForm'>Отправить</button>
-        </form>    
-    </div> 
+    <form id="callback-form">
+        <h2>Обратная связь</h2>
+        <button class="flaticon-delete close"></button>  
+        <input name="name" placeholder="Введите ваше имя" type="text">
+        <input 
+            name="email" 
+            placeholder="Введите ваш номер телефона"
+            type="email"
+            required>
+        <button type="submit">Отправить</button>
+    </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- vendorJS:js -->
     <!-- endinject -->
