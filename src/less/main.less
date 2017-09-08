@@ -1,11 +1,4 @@
 @import url("_mixins.less");
-//GENERAL STYLES
-.clearfix::after {
-    display: table;
-    content: '';
-    clear: both;
-}
-
 .wrapper {
     margin: 0 auto;
 }
@@ -13,17 +6,17 @@
 h2, h3 {
     .text(@main-font);
     text-align: center;
+    font-weight: 700;
 }
 
-//MAIN STYLES
 header {
-    background-color: @header;
-    width: 100%;
-    height: 60px;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
+    width: 100%;
+    height: 60px;
+    background-color: @header;
     text-align: center;
 
     .logo-container {
@@ -37,19 +30,19 @@ header {
         &::after {
             position: absolute;
             content: '';
-            display: block;
             top: 100%;
             left: 50%;
-            transform: translateX(-50%);
+            z-index: 1000;
+            display: block;
             width: 100px;
             height: 30px;
+            transform: translateX(-50%);
             background: url('../assets/triangle.png') no-repeat;
-            background-size: contain;
-            z-index: 1000;
+            background-size: contain;   
         }    
     }
 
-    #mobileMenu {
+    #mobile-menu {
         display: none;
     }
 }
@@ -59,6 +52,7 @@ main {
 
     .slider {
         background-color: #1c252f;
+        
         img {
             max-width: 100%;
             height: auto;
@@ -66,13 +60,13 @@ main {
     }
 
     #services {
+        padding-top: 0;
         background-image: radial-gradient(circle farthest-corner at 49% -34%, #17232c 25%, #111416);
         box-shadow: 0 1px 26px 4px rgba(0, 0, 0, .7);
-        padding-top: 0;
-
+        
         h2 {
-            width: 300px;
             margin: 0 auto;
+            width: 300px;
             line-height: 80px;
             color: @white;
             background: url('../assets/romb.png') 50% -30px no-repeat;
@@ -94,7 +88,6 @@ main {
                     transition: all 0.5s ease;
                     background: url('../assets/circle.png') 50% 50% no-repeat;
                 	background-size: 80%;
-
 
                     img {
                         position: absolute;
@@ -150,7 +143,6 @@ main {
             &-name {
                 display: block;
                 .text(@main-font);
-                font-weight: 700;  
             }
 
             &-title {
@@ -174,7 +166,6 @@ main {
             }
 
             .gallery {
-                position: relative;
                 margin-bottom: 20px;
                 overflow: hidden;
                 border-radius: 5px;
@@ -184,43 +175,24 @@ main {
                         filter: grayscale(100%);
                         transform: scale(1.5);
                     }
-                }
+                }                  
                     
-                &::after {
-                    position: absolute;
-                    content: 'Спальни';
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    opacity: 0;
-                    transition: all 500ms ease;
-                    .text(@main-font, @white);
-                    font-size: 30px; 
-                }                    
-                    
-                a {
-                        &:not(:first-child) {
-                            display: none;
-                        }
+                a {                    
+                    &:not(:first-child) {
+                        display: none;
+                    }
                         
-                        img:first-child {
-                            max-width: 100%;
-                            height: auto;
-                           	border-radius: 5px;
-                            transition: all 800ms ease;  
-                        }                     
+                    img:first-child {
+                        max-width: 100%;
+                        height: auto;
+                        border-radius: 5px;
+                        transition: all 800ms ease;  
+                    }                     
                 }
             }
 
-            .expand {
-                display: inline-block;
-                padding: 10px 25px;
-                border-radius: 5px;
-                .pulse(); 
-                .text(@main-font, @white);
-                font-size: 25px;
-                font-weight: 700;
-                background-color: @btn-color;
+            .load-more {
+                line-height: 50px;
             }
         }
     }
@@ -246,9 +218,8 @@ main {
                     margin-left: 15px;
                     text-align: left;
                     .text(@subs-font, @white);
-                    text-transform: uppercase;
                     font-size: 18px;
-                    font-weight: 700;
+                    text-transform: uppercase;
                 }
             }
         }
@@ -278,27 +249,27 @@ main {
                     
                         &:hover {
                             filter: none;
-                        } 
+                        }
                     }   
                 }
 
                 &-name {
+                    text-align: center;
                     font-size: 16px;
                     .text(@subs-font);
-                    text-align: center;
                 }
             }
         }
 
-        #morePartners {
+        #more-partners {
             .btn-blind(16px);
         }
     }
 
-    #reviews {
-        #addReview {
-            .btn-blind(16px);
+    .reviews {
+        #add-review {
             margin-bottom: 10px;
+            .btn-blind(16px);
         }
 
         #reviews-list {
@@ -317,7 +288,7 @@ main {
 
                 &-post {
                     &-title {
-                        display: inline-block;
+                        text-align: left;
                         .text(@main-font);
                         font-size: 22px;
                         font-weight: 700;
@@ -325,8 +296,9 @@ main {
                     }
 
                     &-subtitle {
-                        .text(@subs-font);
                         padding-bottom: 10px;
+                        .text(@subs-font);
+                        
                     }
 
                     &-text {
@@ -340,11 +312,11 @@ main {
 }
 
 footer {
-    background-image: radial-gradient(circle farthest-corner at 48% -46%, #273e4d 25%, #111416);
-    box-shadow: 0 0 18px 1px rgba(0, 0, 0, .7);
     padding-top: 25px;
     overflow: hidden;
-
+    background-image: radial-gradient(circle farthest-corner at 48% -46%, #273e4d 25%, #111416);
+    box-shadow: 0 0 18px 1px rgba(0, 0, 0, .7);
+    
     .contacts {
         .contacts-list {
             span {
@@ -352,36 +324,14 @@ footer {
                 font-size: 14px;
                 .text(@subs-font, @footer-text);
             } 
-            
-            #map {
-                display: none;
-                width: 100%;
-                height: 100%;
-                position: fixed;
-                left: 0;
-                z-index: 10000;
 
-                img {
-                    height: 100%;
-                }
-
-                .close {
-                    position: absolute;
-                    bottom: 0;
-                    .button(200px, 40px, 25px);
-                    .text(@main-font, @white);
-                    transform: translateX(-50%);
-                    left: 50%;
-                }
-            }
-
-            #showMap {
-                outline: none;
-                border: none;
-                background-color: transparent;
+            #show-map {
                 padding: 0;
-                font-size: 14px;
+                border: none;
+                outline: none;
+                background-color: transparent;
                 .text(@subs-font, @footer-text);
+                font-size: 14px;
                 text-decoration: underline;     
             } 
         }
@@ -403,67 +353,63 @@ footer {
     }
 
     .dive {
-        text-align: center;
-        height: 300px;
         position: relative;
+        height: 300px;
+        text-align: center;
 
-        .whale {
+        #whale {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            max-width: 100%;
+            height: auto;
         }
 
-        #btnDive {
+        #btn-dive-in {
+            .pulse();
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            margin-left: -75px;
             .button(150px, 35px, 20px);
             .text(@main-font, @white);
-            .pulse();
-            left: 50%;
-            transition: all 0.5s ease-out;
-            margin-left: -75px;
-            bottom: 0;
-            position: absolute;
+            transition: all 0.5s ease-out; 
         }
-
-        .dive-form {
+            
+        #dive-form {
             display: none;
             position: absolute;
             top: 100%;
             left: 50%;
+            width: 300px;
+            padding: 10px;
             transform: translateX(-50%);       
-            
-            .footer-form {
-                padding-bottom: 10px;
-                width: 300px;
 
-                input, button {
-                    display: block;
-                }
-
-                input {
-                    .input(90%, 45px, 15px, 0 10px);
-                    .text(@subs-font);
-                    max-width: 300px;
-                    margin-bottom: 25px;
-                } 
-                
-                button {
-                    .button(200px, 40px, 20px);
-                    .text(@main-font, @white);
-                }
+            input {
+                margin-bottom: 20px;
+                .input(300px, 45px, 15px, 0 10px);
+                .text(@subs-font); 
+            } 
+                    
+            button[type="submit"] {
+                margin-bottom: 15px;
+                .button(200px, 40px, 20px);
+                .text(@main-font, @white);
             }
+                
 
-            .whale-rise {
+            #btn-dive-out {
                 .btn-blind(15px);
                 color: @footer-text;
             }
         }
     }
 
-    .copyright {
+    .copyright p {
         text-align: center;
-        font-size: 10px;
         .text(@subs-font, @footer-text);
+        font-size: 10px;
 
         a {
             color: @footer-text;
@@ -471,13 +417,12 @@ footer {
     }
 }
 
-#goUp, #callbackBtn {
-    position: fixed;
-    padding: 0;
+#go-up, 
+#callback-btn {
     right: 5%;
+    .flaticon(45px, @btn-color);
     opacity: 0.5;
     transition: opacity 0.5s ease-in-out;
-    .flaticon(45px, @btn-color);
     
     &::before {
         box-shadow: 0 0 10px 2px rgba(0, 0, 0, .7);
@@ -489,14 +434,16 @@ footer {
     }
 }
 
-#goUp {
+#go-up {
+    position: fixed;
     bottom: 85px;
 }
 
-#callbackBtn {
+#callback-btn {
+    position: fixed;
     bottom: 20px;
-    animation: flip 4s ease-out 0s infinite normal both;
     border-radius: 50%;
+    animation: flip 4s ease-out infinite;
     transition: all 500ms ease-out;
     
     &:hover, &:active {
@@ -504,28 +451,26 @@ footer {
     }
 
     &::after {
+        display: block;
         position: absolute;
         border-radius: 50%;
-        display: block;
-        content: '';
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
+        content: '';
         border: solid 2px snow;
         animation: pulse 1.5s ease-out 0s infinite;
     }
 }
 
-#callbackForm {
+#callback-form {
     display: none;
-    background-color: #2f4e62;
-    width: 250px;
     position: fixed;
-    z-index: 100;
     right: 5%;
-    padding: 10px;
-    text-align: right;
+    z-index: 100;
+    padding: 20px;
+    background-color: #2f4e62;
     border-radius: 5px;
 
     .close {
@@ -547,7 +492,7 @@ footer {
             margin-bottom: 20px;
         }
         
-        #sendForm {
+        button {
             .button(150px, 40px, 20px);
             .text(@main-font, @white);
             .pulse();
@@ -556,71 +501,21 @@ footer {
     }
 }
 
-#reviewForm {
-    position: fixed;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10000;
-    display: none;
-    background: url('../assets/cell.png') repeat;
-    background-size: 40px;
-    .v-align();
-    text-align: center;
-    
-    .close {
-        float: right;
-        margin: 10px 10px 0 0;
-        .flaticon(20px);
-    }
-    
-    form {
-        display: inline-block;
-        vertical-align: middle;
-       
-        h2 {
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        input, textarea {
-            .text(@subs-font);
-            max-width: 400px;
-            display: block;
-            margin: 0 auto 20px;
-        }
-            
-        input {
-            .input(90%, 40px, 18px, 0 10px);
-        }
-
-        textarea {
-            .input(90%, 250px, 18px, 10px);
-        }
-
-        button {
-            .button(200px, 50px, 24px);
-            .text(@main-font, @white);
-            .pulse();
-        }
-    }
-}
-
-#serviceDetails {
+.service-details {
     display: none;
     position: fixed;
     z-index: 1101;
-    background-color: #235871;
-    overflow-y: scroll;
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
     text-align: center;
-
-
+    background-color: #235871;
+    
+    
     .close {
-        .flaticon(20px);
         float: right;
         margin-top: 5px;
+        .flaticon(20px);
     }
 
     h2 {
@@ -658,14 +553,88 @@ footer {
     }
 }
 
-.load-more {
-        display: block;
-        clear: both;
-        margin: 0 auto;
-        .button(200px, 50px, 25px);
-        .text(@main-font, @white);
-        .pulse();
+#review-form {
+    display: none;
+    position: fixed;
+    left: 0;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    .v-align();
+    text-align: center;
+    background: url('../assets/cell.png') repeat;
+    background-size: 40px;
+    
+    .close {
+        float: right;
+        margin: 10px 10px 0 0;
+        .flaticon(20px);
     }
+    
+    form {
+        display: inline-block;
+        vertical-align: middle;
+       
+        h2 {
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        input, textarea {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 400px;
+            .text(@subs-font);
+        }
+            
+        input {
+            .input(90%, 40px, 18px, 0 10px);
+        }
+
+        textarea {
+            .input(90%, 250px, 18px, 10px);
+        }
+
+        button {
+            .button(200px, 50px, 24px);
+            .text(@main-font, @white);
+            .pulse();
+        }
+    }
+}
+
+#map-container {
+    display: none;
+    position: fixed;
+    left: 0;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+                
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+        .close {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            .button(200px, 40px, 25px);
+            .text(@main-font, @white);
+            transform: translateX(-50%);
+        }
+    }
+
+.load-more {
+    display: block;
+    clear: both;
+    margin: 0 auto;
+    .button(200px, 50px, 25px);
+    .text(@main-font, @white);
+    .pulse();
+}
 
 @import url('animation.less');
 @import url('responsive.less');
