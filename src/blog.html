@@ -56,7 +56,7 @@
 			</ul>
         </section>
         <section class="posts">
-                <a href="#" class="post-block">
+            <a href="#" class="post-block">
                     <div class="post-miniature">
                         <img src="https://terraform.com.ua/wp-content/uploads/2017/05/10-1-1024x683.jpg" alt="">
                     </div>
@@ -211,18 +211,17 @@
                 <div class="contacts-list contacts-right">
                     <span>Адрес: Украина, г.Киев, ул.Митрополита Андрея Шептицкого 4</span> 
                     <span>ТЦ "Комод"</span>
-                    <button id="showMap">Посмотреть на карте</button>
-                    <div id="map">
+                    <button id="show-map">Посмотреть на карте</button>
+                    <div id="map-container">
                         <img src="./assets/map.png" alt="">
                         <button class='close'>Закрыть карту</button>
                     </div>
                 </div>
             </div>
             <div class="dive">
-                <img id='whale' src='assets/whale.png'>
-                <button id='btn-dive'>Погружаемся</button>
-                <div class="dive-form-container">
-                    <form id="dive-form">
+                <img id='whale' src='./assets/whale.png'>
+                <button id='btn-dive-in'>Погружаемся</button>
+                <form id="dive-form">
                         <input 
                             type="text"
                             placeholder="Введите ваше имя"
@@ -231,18 +230,15 @@
                             type="text"
                             placeholder="Введите ваш номер телефона"
                             required>
-                        <button id='send'>Отправить</button>
-                    </form>     
-                    <button class="whale-rise">Всплыть обратно</button>
-                </div>
+                        <button type="submit">Отправить</button>
+                        <button id="btn-dive-out">Всплыть обратно</button>
+                </form>     
             </div>
-            <div class="copyright">
-                Разработал <a href="#" target="_blank">Игорь Соколов</a>
-            </div>
+            <p class="copyright">Разработал <a href="#" target="_blank">Игорь Соколов</a></p>
         </div>            
     </footer>
-    <button id="goUp" class="flaticon-arrow-up"></button>
-    <button id="callbackBtn" class="flaticon-phone-symbol-of-an-auricular-inside-a-circle"></button>
+    <button id="go-up" class="flaticon-arrow-up"></button>
+    <button id="callback-btn" class="flaticon-phone-symbol-of-an-auricular-inside-a-circle"></button>
     <form id="callback-form">
         <h2>Обратная связь</h2>
         <button class="flaticon-delete close"></button>  
@@ -254,6 +250,10 @@
             required>
         <button type="submit">Отправить</button>
     </form>
+    <div id="map-container">
+        <img src="assets/map.png" alt="">
+        <button class='close'>Закрыть карту</button>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- vendorJS:js -->
     <!-- endinject -->
