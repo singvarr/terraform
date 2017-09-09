@@ -251,7 +251,7 @@
                     <span>Компания TerraForm 2016-2017</span>
                 </div>
                 <div class="contacts-list contacts-right">
-                    <span>Адрес: Украина, г.Киев, ул.Митрополита Андрея Шептицкого 4</span> 
+                    <span>Адрес: Украина, г.Киев, ул.Митрополита Андрея Шептицкого 4</span>
                     <span>ТЦ "Комод"</span>
                     <button id="show-map">Посмотреть на карте</button>
                     <div id="map-container">
@@ -267,11 +267,11 @@
                         <input 
                             type="text"
                             placeholder="Введите ваше имя"
-                            required>
+                            name="name">
                         <input 
                             type="text"
                             placeholder="Введите ваш номер телефона"
-                            required>
+                            name="phone">
                         <button type="submit">Отправить</button>
                         <button id="btn-dive-out">Всплыть обратно</button>
                 </form>     
@@ -284,9 +284,14 @@
     <form id="callback-form">
         <h2>Обратная связь</h2>
         <button class="flaticon-delete close"></button>
-        <input name="name" placeholder="Введите ваше имя" type="text">
-        <input name="email" placeholder="Введите ваш номер телефона"
-                required="required" type="email">
+        <input 
+            type="text"
+            name="name"
+            placeholder="Введите ваше имя">
+        <input 
+            type="text"
+            name="phone"
+            placeholder="Введите ваш номер телефона">
         <button type="submit">Отправить</button>
     </form>
     <div class="service-details" id='3D-interior-details'>
@@ -413,16 +418,19 @@
             <a href="/" class="more-details">Подробнее</a>
         </div>
     </div>
-    <div id="review-form">
+    <div id="review-form-dialog">
         <button class="flaticon-delete close"></button>    
-        <form name="review-post">
+        <form id="review-form">
             <h2>Оставьте комментарий</h2> 
             <input
                 name="name" 
                 type="text" 
                 placeholder="Введите ваше имя" 
                 required>
-            <textarea name="comment" placeholder="Напишите отзыв" required></textarea> 
+            <textarea
+                name="comment"
+                placeholder="Напишите отзыв"
+                required></textarea> 
             <button type="submit">Отправить</button>
         </form>
     </div>
@@ -431,6 +439,8 @@
         <button class='close'>Закрыть карту</button>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
     <!-- vendorJS:js -->
     <!-- endinject -->
     <!-- inject:js -->

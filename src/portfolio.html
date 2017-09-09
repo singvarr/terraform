@@ -183,16 +183,17 @@
                 <img id='whale' src='./assets/whale.png'>
                 <button id='btn-dive-in'>Погружаемся</button>
                 <form id="dive-form">
-                        <input 
-                            type="text"
-                            placeholder="Введите ваше имя"
-                            required>
-                        <input 
-                            type="text"
-                            placeholder="Введите ваш номер телефона"
-                            required>
-                        <button type="submit">Отправить</button>
-                        <button id="btn-dive-out">Всплыть обратно</button>
+                    <input
+                        name="name"  
+                        type="text"
+                        placeholder="Введите ваше имя"
+                        required>
+                    <input
+                        name="phone" 
+                        type="tel"
+                        placeholder="Введите ваш номер телефона">
+                    <button type="submit">Отправить</button>
+                    <button id="btn-dive-out">Всплыть обратно</button>
                 </form>     
             </div>
             <p class="copyright">Разработал <a href="#" target="_blank">Игорь Соколов</a></p>
@@ -204,8 +205,7 @@
         <h2>Обратная связь</h2>
         <button class="flaticon-delete close"></button>
         <input name="name" placeholder="Введите ваше имя" type="text">
-        <input name="email" placeholder="Введите ваш номер телефона"
-                required="required" type="email">
+        <input name="phone" placeholder="Введите ваш номер телефона" type="tel">
         <button type="submit">Отправить</button>
     </form>
     <div id="map-container">
@@ -213,6 +213,8 @@
         <button class='close'>Закрыть карту</button>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
     <!-- vendorJS:js -->
     <!-- endinject -->
     <!-- inject:js -->

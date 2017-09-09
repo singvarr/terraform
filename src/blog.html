@@ -166,14 +166,17 @@
                         <span class="post-views">11000 просмотров</span>
                     </div>
                 </a>
-            <button class="load-more">Показать больше</button>   
+            <button class="load-more">Показать больше</button> 
         </section>
         <aside class="sidebar">
             <div class="widget">
-                <form>
+                <form id="search">
                     <h3 class="widget-title">Поиск</h3>
-                    <input type="text">
+                    <input 
+                        type="search"
+                        name="query">
                     <button type="submit">Поиск</button>
+                    <div class="error-log"></div>
                 </form>
             </div>
             <div class="widget">
@@ -223,15 +226,18 @@
                 <button id='btn-dive-in'>Погружаемся</button>
                 <form id="dive-form">
                         <input 
+                            name="name"
                             type="text"
                             placeholder="Введите ваше имя"
-                            required>
-                        <input 
-                            type="text"
+                            >
+                        <input
+                            name="phone"
+                            type="tel"
                             placeholder="Введите ваш номер телефона"
-                            required>
+                            >
                         <button type="submit">Отправить</button>
                         <button id="btn-dive-out">Всплыть обратно</button>
+                        <div class="error-log"></div>
                 </form>     
             </div>
             <p class="copyright">Разработал <a href="#" target="_blank">Игорь Соколов</a></p>
@@ -242,19 +248,24 @@
     <form id="callback-form">
         <h2>Обратная связь</h2>
         <button class="flaticon-delete close"></button>  
-        <input name="name" placeholder="Введите ваше имя" type="text">
         <input 
-            name="email" 
+            name="name" 
+            placeholder="Введите ваше имя"
+            type="text">
+        <input 
+            name="phone" 
             placeholder="Введите ваш номер телефона"
-            type="email"
-            required>
+            type="tel">
         <button type="submit">Отправить</button>
+        <div class="error-log"></div>
     </form>
     <div id="map-container">
         <img src="assets/map.png" alt="">
         <button class='close'>Закрыть карту</button>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
     <!-- vendorJS:js -->
     <!-- endinject -->
     <!-- inject:js -->
