@@ -15,7 +15,8 @@ $(document).ready(function() {
 			$(target).show().animate(positions.dest, 700, 'swing');
 		});
 
-		$(target + ' .close').on('click', function() {
+		$(target + ' .close').on('click', function(e) {
+			e.preventDefault();
 			if(reverse) {
 				positions.end[side] = '100%';
 				$(target).animate(positions.end, 700, 'swing', 
@@ -33,14 +34,17 @@ $(document).ready(function() {
 		});
 	}
 
-	animation({top: 0}, false, '#mobileMenu', '#sandwich');
-	animation({top: 0}, true, '#map', '#showMap');
-	animation({bottom: 20}, false, '#callbackForm', '#callbackBtn');
-	animation({top: 0}, true, '#reviewForm', '#addReview');
-	animation({top: 0}, true, '#serviceDetails', '.service');
+	animation({top: 0}, false, '#mobile-menu', '#sandwich');
+	animation({top: 0}, true, '#map-container', '#show-map');
+	animation({bottom: 20}, false, '#callback-form', '#callback-btn');
+	animation({top: 0}, true, '#review-form-dialog', '#add-review');
+	animation({top: 0}, true, '#3D-interior-details', '#3D-interior');
+	animation({top: 0}, true, '#3D-exterion-details', '#3D-exterior');
+	animation({top: 0}, true, '#3D-modeling-details', '#3D-modeling');
+	animation({top: 0}, true, '#3D-animation-details', '#3D-animation');
 
-	$('#btnDive').on('click', function() {
-		$('.whale').animate({
+	$('#btn-dive-in').on('click', function() {
+		$('#whale').animate({
 			top: '+=200',
 			left: '+=50%',
 			opacity: '0'
@@ -50,23 +54,27 @@ $(document).ready(function() {
 				.css('left', '-=100%')
 		});
 		
-		$(this).css('opacity','0');
-		$('.dive-form')
+		$(this).animate({opacity: '0'}, 300, 'swing', function () {
+			$(this).hide();
+		});
+
+		$('#dive-form')
 			.show()
 			.animate({
 				top: '20',
 			}, 500, 'swing')
 	});
 	
-	$('.whale-rise').on('click', function() {
-		$('.dive-form')
+	$('#btn-dive-out').on('click', function(e) {
+		e.preventDefault();
+		$('#dive-form')
 			.animate({top: '100%'}, 500, 'swing', 
 			function() {
 				$(this).hide();
 		});
-		$('#btnDive').css('opacity', '1');
-	
-		$('.whale')
+		
+		$('#btn-dive-in').show().animate({opacity: '1'}, 300, 'swing');	
+		$('#whale')
 			.show()
 			.animate({
 				opacity: '1',
