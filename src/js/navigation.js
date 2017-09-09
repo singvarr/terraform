@@ -17,13 +17,13 @@ $(document).ready(function() {
 		});
 
 		$(document).scrollTop() < 600 ?
-		$('#goUp').hide():
-		$('#goUp').show();
+		$('#go-up').hide():
+		$('#go-up').show();
 		
     });
 
     //Go up button
-    $('#goUp').on('click', function() {
+    $('#go-up').on('click', function() {
         $('body').animate({
             scrollTop: 0
         }, 2000)
