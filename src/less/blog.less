@@ -1,46 +1,50 @@
 main {
 	.clearfix();
 
-
-.posts {	
-	.post-block {
+	.posts {
+		margin-top: 20px;
 		margin-bottom: 20px;
-		.v-align();
-		.post-miniature {
-			display: inline-block;
-			width: 35%;
-			margin-right: 5%;
-			vertical-align: middle;
-			
-			img { 
-				max-width: 100%;
-				height: auto;
-			}
-		}
+		padding-left: 20px;
+		padding-right: 20px;
+		box-sizing: border-box;
+		border-radius: 5px;
+		background-color: #ececec;
 
-		.post-description {
-			display: inline-block;
-			vertical-align: middle;
-			width: 60%;
+		.post-block {
+			margin-bottom: 20px;
+			.v-align();
 
-			.title-post {
-				text-align: left;
-				.text(@main-font);
-				font-size: 30px;
+			.post-miniature {
+				display: inline-block;
+				width: 35%;
+				margin-right: 5%;
+				vertical-align: middle;
+				
+				img { 
+					max-width: 100%;
+					height: auto;
+				}
 			}
 
-			.post-date, .post-views {
-				display: block;
-				.text(@subs-font);
-				font-size: 16px;
+			.post-description {
+				display: inline-block;
+				vertical-align: middle;
+				width: 60%;
+
+				.title-post {
+					text-align: left;
+					.text(@main-font);
+					font-size: 30px;
+				}
+
+				.post-date, .post-views {
+					display: block;
+					.text(@subs-font);
+					font-size: 16px;
+				}
 			}
 		}
 	}
-
-}
-.sidebar {
-	padding-bottom: 30px;
-
 
 	.widget {
 		margin-bottom: 20px;
@@ -53,11 +57,9 @@ main {
 			margin-bottom: 0;
 		}
 
-
 		&-title {
 			margin-bottom: 10px;
 			text-align: left;
-			text-decoration: underline;
 		}
 
 		input {
@@ -72,14 +74,13 @@ main {
 
 		li {
 			line-height: 22px;
-				
-		a {
+					
+			a {
 				.text(@subs-font);
 				text-decoration: underline;
 			}
 		}
 	}
-}
 }
 
 @media(min-width: 1025px) {
@@ -87,12 +88,13 @@ main {
 		float: left;
 		width: 60%;
 		margin-left: 3%;
+		padding-top: 20px !important;
 	}
 
 	.sidebar {
 		float: right;
 		width: 30%;
-		padding-top: 30px;
+		padding-top: 20px;
 		margin-right: 3%;
 	}
 }
@@ -100,15 +102,12 @@ main {
 @media(max-width: 1024px) {
 	.posts, .sidebar {
 		width: 95%;
-	}
-
-	.posts {
-		margin: 0 auto;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.sidebar {
-		margin-left: auto;
-		margin-right: auto;
+		padding-bottom: 30px;
 	}
 }
 
