@@ -668,20 +668,11 @@ input.error, textarea.error {
     border: solid 1px red !important;
 }
 
-.error-log {
-    position: absolute;
-    bottom: 105%;
-    width: 200px;
-    border-radius: 5px;
-    background-color: @white;
-    .text(@main-font, red);
-    font-size: 25px;
-
-    label {
-        display: block;
-        padding: 10px;
-    }
+.error::placeholder {
+    color: red;
 }
+
+
 
 @import url('animation.less');
 @import url('responsive.less');

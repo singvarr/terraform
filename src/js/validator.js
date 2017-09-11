@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$.validator.addMethod('phone', function(value, elem) {
-		return /\+(\d){10,12}\b/.test(value);
+		return /\+(\d{12})\b/.test(value);
 	}, 'Введите номер телефона в коректном формате');
 
 	$.validator.addMethod('cyrillic', function(value, elem) {
@@ -9,11 +9,9 @@ $(document).ready(function() {
 
 	$.validator.setDefaults({
 		errorPlacement: function (err, elem) {
-			err.appendTo(elem.parent().find('.error-log'));
+			elem.attr("placeholder", err.text());
 		}
 	});
-
-	$('form').append('<div class="error-log"/>')
 
 	$('#review-form').validate({
 		rules: {
@@ -33,12 +31,12 @@ $(document).ready(function() {
 		messages: {
 			name: {
 				required: 'Укажите свое имя',
-				minlength: 'Введите не меньше 3 символов'
+				minlength: 'Не меньше 3 символов'
 			},
 
 			comment: {
 				required: 'Напишите ваш комментарий',
-				minlength: 'Введите не меньше 10 символов',
+				minlength: 'Не меньше 10 символов',
 			}
 		}
 	});
@@ -60,11 +58,11 @@ $(document).ready(function() {
 		messages: {
 			name: {
 				required: 'Укажите свое имя',
-				minlength: 'Введите не меньше 3 символов'
+				minlength: 'Не меньше 3 символов'
 			},
 
 			phone: {
-				required: 'Вы не ввели номер телефона'
+				required: 'Вы не ввели номер'
 			}
 		}
 	};
@@ -77,14 +75,13 @@ $(document).ready(function() {
 			query: {
 				required: true,
 				minlength: 5,
-				cyrillic: true
 			}
 		},
 		
 		messages: {
 			query: {
-				required: 'Введите текст запроса',
-				minlength: 'Введите не меньше 5 символов'
+				required: 'Введите запрос',
+				minlength: 'Не меньше 5 символов'
 			}
 		}
 	})
