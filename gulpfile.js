@@ -12,7 +12,6 @@ const gulp = require('gulp');
 	inject = require('gulp-inject');
 	series = require('stream-series');
 	htmlMin = require('gulp-htmlmin');
-	ifElse = require('gulp-if-else');
 
 gulp.task('styles', () => {
 	return gulp.src('src/less/main.less')
