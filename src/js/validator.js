@@ -38,7 +38,11 @@ $(document).ready(function() {
 				required: 'Напишите ваш комментарий',
 				minlength: 'Не меньше 10 символов',
 			}
-		}
+		},
+		
+		submitHandler: function(form) {
+    		alert("Ваша форма отправлена");
+  		}
 	});
 
 	var callbackRules = {
@@ -64,7 +68,11 @@ $(document).ready(function() {
 			phone: {
 				required: 'Вы не ввели номер'
 			}
-		}
+		},
+
+		submitHandler: function(form) {
+    		alert("Ваша форма отправлена");
+  		}
 	};
 
 	$('#callback-form').validate(callbackRules);
