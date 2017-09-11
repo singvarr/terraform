@@ -1,7 +1,28 @@
 main {
 	.clearfix();
+	
+	.post {
+		text-align: justify;
+		font: 16px @subs-font;	
+	}
 
-	.posts {
+	.post-title-block {
+		.v-align();
+		height: 400px;
+		text-align: center;
+		background: url('../assets/slider/1.jpg') 50% 50% no-repeat;
+		background-size: contain;
+
+		.post-title {
+			display: inline-block;
+			vertical-align: middle;
+			.text(@main-font, @white);
+			font-size: 30px;
+		}
+	}
+
+	article.post, 
+	section.posts {
 		margin-top: 20px;
 		margin-bottom: 20px;
 		padding-left: 20px;
@@ -84,7 +105,8 @@ main {
 }
 
 @media(min-width: 1025px) {
-	.posts {
+	article.post, 
+	section.posts {
 		float: left;
 		width: 60%;
 		margin-left: 3%;
@@ -100,7 +122,9 @@ main {
 }
 
 @media(max-width: 1024px) {
-	.posts, .sidebar {
+	article.post, 
+	section.posts, 
+	.sidebar {
 		width: 95%;
 		margin-left: auto;
 		margin-right: auto;
@@ -112,7 +136,7 @@ main {
 }
 
 @media(min-width: 481px) {
-	.posts {
+	section.posts {
 		.clearfix();
 		font-size: 0;
 		

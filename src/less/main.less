@@ -566,7 +566,7 @@ footer {
     }
 }
 
-#review-form {
+#review-form-dialog {
     display: none;
     position: fixed;
     left: 0;
@@ -648,7 +648,6 @@ footer {
 h2, h3 {
     .text(@main-font);
     text-align: center;
-    font-weight: 700;
 }
 
 .load-more {
@@ -658,6 +657,30 @@ h2, h3 {
     .button(200px, 50px, 25px);
     .text(@main-font, @white);
     .pulse();
+}
+
+form {
+    position: relative;
+}
+
+input.error, textarea.error {
+    position: relative;
+    border: solid 1px red !important;
+}
+
+.error-log {
+    position: absolute;
+    bottom: 105%;
+    width: 200px;
+    border-radius: 5px;
+    background-color: @white;
+    .text(@main-font, red);
+    font-size: 25px;
+
+    label {
+        display: block;
+        padding: 10px;
+    }
 }
 
 @import url('animation.less');
