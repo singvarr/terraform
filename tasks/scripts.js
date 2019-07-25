@@ -10,7 +10,7 @@ module.exports = function(options) {
             .src(srcPath)
             .pipe($.watch(srcPath))
             .pipe($.if(isDev, $.sourcemaps.init()))
-            .pipe($.babel({ presets: "@babel/env" }))
+            .pipe($.babel({ presets: ["@babel/env"] }))
             .pipe($.concat("bundle.js"))
             .pipe(
                 $.if(
@@ -18,10 +18,7 @@ module.exports = function(options) {
                     combiner.obj($.uglify(), $.rename({ suffix: ".min" }))
                 )
             )
-            .pipe(
-                $.if(isDev),
-                $.sourcemaps.write()
-            )
+            .pipe($.if(isDev, $.sourcemaps.write()))
             .pipe(gulp.dest(distPath));
     };
 };
