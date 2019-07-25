@@ -1,3 +1,5 @@
+const $ = require("jquery");
+
 $(document).ready(function() {
 	function animation(dest, reverse, target, handler) {
 		var positions = {

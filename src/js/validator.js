@@ -1,3 +1,5 @@
+const $ = require("jquery")
+
 $(document).ready(function() {
 	$.validator.addMethod('phone', function(value, elem) {
 		return /\+(\d{12})\b/.test(value);
