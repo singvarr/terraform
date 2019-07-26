@@ -1,5 +1,4 @@
 const gulp = require("gulp");
-
 const {
     DIST_DIRECTORY,
     IS_DEVELOPMENT,
@@ -9,6 +8,7 @@ const {
 
 const tasks = {
     ASSETS: "assets",
+    BUILD: "build",
     CLEAN: "clean",
     IMAGES: "images",
     LINT: "lint",
@@ -19,33 +19,13 @@ const tasks = {
 function lazyLoadTask(taskName, path, options) {
     options.taskName = taskName;
 
-    gulp.task(taskName, function(callback) {
+    gulp.task(taskName, callback => {
         const task = require(path);
         const handler = task.call(this, options);
 
         return handler(callback);
     });
 }
-
-lazyLoadTask(tasks.CLEAN, `${TASKS_DIRECTORY}/clean`, { path: DIST_DIRECTORY });
-
-lazyLoadTask(tasks.STYLES, `${TASKS_DIRECTORY}/styles`, {
-    distPath: DIST_DIRECTORY,
-    isDev: IS_DEVELOPMENT,
-    srcPath: `${SRC_DIRECTORY}/less/**/*.less`
-});
-
-lazyLoadTask(tasks.SCRIPTS, `${TASKS_DIRECTORY}/scripts`, {
-    distPath: DIST_DIRECTORY,
-    isDev: IS_DEVELOPMENT,
-    srcPath: `${SRC_DIRECTORY}/js/**/*.js`
-});
-
-lazyLoadTask(tasks.IMAGES, `${TASKS_DIRECTORY}/images`, {
-    distPath: `${DIST_DIRECTORY}/assets/img`,
-    isDev: IS_DEVELOPMENT,
-    srcPath: `${SRC_DIRECTORY}/assets/img/**/*.{png,jpeg,jpg}`
-});
 
 lazyLoadTask(tasks.ASSETS, `${TASKS_DIRECTORY}/assets`, {
     distPath: `${DIST_DIRECTORY}/assets`,
@@ -56,9 +36,40 @@ lazyLoadTask(tasks.ASSETS, `${TASKS_DIRECTORY}/assets`, {
     ]
 });
 
-gulp.task("default", () => {
-    gulp.watch("src/less/**/*.less", ["styles"]);
-    gulp.watch("src/js/**/*.js", ["scripts"]);
+lazyLoadTask(tasks.CLEAN, `${TASKS_DIRECTORY}/clean`, { path: DIST_DIRECTORY });
+
+lazyLoadTask(tasks.IMAGES, `${TASKS_DIRECTORY}/images`, {
+    distPath: `${DIST_DIRECTORY}/assets/img`,
+    isDev: IS_DEVELOPMENT,
+    srcPath: `${SRC_DIRECTORY}/assets/img/**/*.{png,jpeg,jpg}`
 });
 
-gulp.task("build", gulp.series("clean"));
+lazyLoadTask(tasks.LINT, `${TASKS_DIRECTORY}/lint`, {
+    srcPath: [__filename, `${SRC_DIRECTORY}/js/**/*.js`, "./tasks/*.js"]
+});
+
+lazyLoadTask(tasks.SCRIPTS, `${TASKS_DIRECTORY}/scripts`, {
+    distPath: `${DIST_DIRECTORY}/js`,
+    isDev: IS_DEVELOPMENT,
+    srcPath: `${SRC_DIRECTORY}/js/**/*.js`
+});
+
+lazyLoadTask(tasks.STYLES, `${TASKS_DIRECTORY}/styles`, {
+    distPath: `${DIST_DIRECTORY}/styles`,
+    isDev: IS_DEVELOPMENT,
+    srcPath: `${SRC_DIRECTORY}/less/**/*.less`
+});
+
+gulp.task(
+    tasks.BUILD,
+    gulp.series(
+        tasks.CLEAN,
+        gulp.parallel(
+            tasks.ASSETS,
+            tasks.IMAGES,
+            tasks.LINT,
+            tasks.SCRIPTS,
+            tasks.STYLES
+        )
+    )
+);
