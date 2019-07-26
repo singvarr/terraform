@@ -8,5 +8,6 @@ WordPress theme for landing site. It was used by Terraform, team of designers.
 
 1. Create .env file.
 2. Launch script from following list:
-    - `npm start` - starts development server and launch `gulp` in watch mode.
-    - `npm run build` - builds assets in production mode.
+    - `npm run build` - builds assets. Note that `gulp-watch` is used in config, so gulp is running in endless stream mode.
+    - `npm run lint` - starts check of code style.
+    - `npm start` - starts development server.
