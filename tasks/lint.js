@@ -9,6 +9,6 @@ module.exports = options => {
         return gulp
             .src(srcPath)
             .pipe($.watch(srcPath))
-            .pipe(combiner.obj($.eslint(), $.eslint.format()));
+            .pipe(combiner.obj($.eslint(), $.eslint.formatEach()));
     };
 };
