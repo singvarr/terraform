@@ -4,6 +4,8 @@
   "description": "WordPress theme for landing site",
   "main": "server.js",
   "scripts": {
+    "build": "gulp build",
+    "lint": "gulp lint",
     "start": "nodemon"
   },
   "keywords": [
@@ -20,10 +22,13 @@
     "del": "^5.0.0",
     "eslint": "^6.1.0",
     "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.2.0",
     "gulp-cli": "^2.2.0",
     "gulp-concat": "^2.6.1",
+    "gulp-debug": "^4.0.0",
+    "gulp-eslint": "^6.0.0",
     "gulp-htmlmin": "^3.0.0",
     "gulp-if": "^3.0.0",
     "gulp-imagemin": "^6.0.0",
