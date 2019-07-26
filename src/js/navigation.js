@@ -1,3 +1,5 @@
+const $ = require("jquery");
+
 $(document).ready(function() {
     //Anchor navigation
 	$(window).on("scroll", function onScroll() {	

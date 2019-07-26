@@ -1,94 +1,75 @@
-const gulp = require('gulp');
-	concat = require('gulp-concat');
-	rename = require('gulp-rename');
-	less = require('gulp-less');
-	LessAutoPrefix = require('less-plugin-autoprefix');
-	autoprefix = new LessAutoPrefix({browsers: ['last 3 versions']});
-	cleanCSS = require('gulp-clean-css');
-	imagemin = require('gulp-imagemin');
-	imageminJpegRecompress = require('imagemin-jpeg-recompress');
-	imageminPngquant = require('imagemin-pngquant');
-	uglify = require('gulp-uglify');
-	inject = require('gulp-inject');
-	series = require('stream-series');
-	htmlMin = require('gulp-htmlmin');
+const gulp = require("gulp");
+const {
+    DIST_DIRECTORY,
+    IS_DEVELOPMENT,
+    SRC_DIRECTORY,
+    TASKS_DIRECTORY
+} = require("./constants");
 
-gulp.task('styles', () => {
-	return gulp.src('src/less/main.less')
-		.pipe(less({plugins: [autoprefix]}))
-		.pipe(cleanCSS({level: 2}))
-		.pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest('dist/css'))
-		.pipe(gulp.dest('dist/css'))	
+const tasks = {
+    ASSETS: "assets",
+    BUILD: "build",
+    CLEAN: "clean",
+    IMAGES: "images",
+    LINT: "lint",
+    SCRIPTS: "scripts",
+    STYLES: "styles"
+};
+
+function lazyLoadTask(taskName, path, options) {
+    options.taskName = taskName;
+
+    gulp.task(taskName, callback => {
+        const task = require(path);
+        const handler = task.call(this, options);
+
+        return handler(callback);
+    });
+}
+
+lazyLoadTask(tasks.ASSETS, `${TASKS_DIRECTORY}/assets`, {
+    distPath: `${DIST_DIRECTORY}/assets`,
+    isDev: IS_DEVELOPMENT,
+    srcPath: [
+        `${SRC_DIRECTORY}/assets/{fonts,icons}/**/*.*`,
+        `${SRC_DIRECTORY}/fixtures/**/*.{png,jpeg,jpg}`
+    ]
 });
 
-gulp.task('scripts', () => {
-	return gulp.src('src/js/**/*.js')
-		.pipe(concat('bundle.js'))
-		.pipe(gulp.dest('dist/js'))
-		.pipe(concat('bundle.js'))
-		.pipe(uglify())
-		.pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest('dist/js'))
+lazyLoadTask(tasks.CLEAN, `${TASKS_DIRECTORY}/clean`, { path: DIST_DIRECTORY });
+
+lazyLoadTask(tasks.IMAGES, `${TASKS_DIRECTORY}/images`, {
+    distPath: `${DIST_DIRECTORY}/assets/img`,
+    isDev: IS_DEVELOPMENT,
+    srcPath: `${SRC_DIRECTORY}/assets/img/**/*.{png,jpeg,jpg}`
 });
 
-gulp.task('images', () => {
-	return gulp.src('src/assets/**/*.*')
-		.pipe(imagemin([
-			imageminPngquant({
-				floyd: 0.3,
-				quality: '30'
-			}),
-			imageminJpegRecompress({
-				loops: 1,
-				min: 50,
-				max: 90,
-				quality: 'veryhigh'
-			})
-		]))
-		.pipe(gulp.dest('dist/assets'))
+lazyLoadTask(tasks.LINT, `${TASKS_DIRECTORY}/lint`, {
+    srcPath: [__filename, `${SRC_DIRECTORY}/js/**/*.js`, "./tasks/*.js"]
 });
 
-gulp.task('fonts', () => {
-	return gulp.src('src/fonts/**/*.*')
-		.pipe(gulp.dest('dist/fonts'))
+lazyLoadTask(tasks.SCRIPTS, `${TASKS_DIRECTORY}/scripts`, {
+    distPath: `${DIST_DIRECTORY}/js`,
+    isDev: IS_DEVELOPMENT,
+    srcPath: `${SRC_DIRECTORY}/js/**/*.js`
 });
 
-gulp.task('vendor', () => {
-	return gulp.src('src/vendor/**/*.*')
-		.pipe(gulp.dest('dist/vendor'))
+lazyLoadTask(tasks.STYLES, `${TASKS_DIRECTORY}/styles`, {
+    distPath: `${DIST_DIRECTORY}/styles`,
+    isDev: IS_DEVELOPMENT,
+    srcPath: `${SRC_DIRECTORY}/less/**/*.less`
 });
 
-gulp.task('html', () => {
-	const streams = {
-		vendorJS: gulp.src('dist/vendor/**/*.min.js', {read: false}),
-		vendorCSS: gulp.src('dist/vendor/**/*.css', {read: false}),
-		appJS: gulp.src('dist/js/**/*.min.js', {read: false}),
-		appCSS: gulp.src(['dist/css/**/*.min.css', 'dist/fonts/**/*.css'], {read: false})
-	}
-
-	return gulp.src('src/*.html')
-		.pipe(inject(streams.vendorCSS, {
-			name: 'vendorCSS',
-			relative: true
-		}))
-		.pipe(inject(streams.appCSS, {relative: true}))
-		.pipe(inject(streams.vendorJS, {
-			name: 'vendorJS',
-			relative: true
-		}))
-		.pipe(inject(streams.appJS, {relative: true}))
-		.pipe(gulp.dest('dist'))
-		.pipe(htmlMin({collapseWhitespace: true}))
-		.pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest('dist'))
-});
-
-gulp.task('default', () => {
-	gulp.watch('./src/*.html', ['html']);
-	gulp.watch('src/less/**/*.less', ['styles']);
-	gulp.watch('src/js/**/*.js', ['scripts']);
-})
-
-	
-
+gulp.task(
+    tasks.BUILD,
+    gulp.series(
+        tasks.CLEAN,
+        gulp.parallel(
+            tasks.ASSETS,
+            tasks.IMAGES,
+            tasks.LINT,
+            tasks.SCRIPTS,
+            tasks.STYLES
+        )
+    )
+);
