@@ -16,15 +16,12 @@ module.exports = function(options) {
                     !isDev,
                     combiner.obj(
                         $.autoprefixer(),
-                        $.cleanCSS({ level: 2 }),
+                        $.cleanCss({ level: 2 }),
                         $.rename({ suffix: ".min" })
                     )
                 )
             )
-            .pipe(
-                $.if(isDev),
-                $.sourcemaps.write()
-            )
+            .pipe($.if(isDev, $.sourcemaps.write()))
             .pipe(gulp.dest(distPath));
     };
 };

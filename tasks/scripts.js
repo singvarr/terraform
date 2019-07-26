@@ -2,10 +2,10 @@ const gulp = require("gulp");
 const $ = require("gulp-load-plugins")();
 const combiner = require("stream-combiner2");
 
-module.exports = function(options) {
+module.exports = options => {
     const { distPath, isDev, srcPath } = options;
 
-    return function() {
+    return () => {
         return gulp
             .src(srcPath)
             .pipe($.watch(srcPath))

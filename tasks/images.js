@@ -14,7 +14,7 @@ const jpegCompressConfig = {
     quality: "veryhigh"
 };
 
-module.exports = function(options) {
+module.exports = options => {
     return () => {
         const { distPath, isDev, srcPath } = options;
 
@@ -30,6 +30,6 @@ module.exports = function(options) {
                     ])
                 )
             )
-            .pipe(distPath);
+            .pipe(gulp.dest(distPath));
     };
 };

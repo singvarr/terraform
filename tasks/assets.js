@@ -1,10 +1,10 @@
 const gulp = require("gulp");
 const $ = require("gulp-load-plugins")();
 
-module.exports = function(options) {
+module.exports = options => {
     const { distPath, srcPath } = options;
 
-    return function() {
+    return () => {
         return gulp
             .src(srcPath)
             .pipe($.watch(srcPath))
