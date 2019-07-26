@@ -1,7 +1,4 @@
 const gulp = require("gulp");
-const imagemin = require("gulp-imagemin");
-const imageminJpegRecompress = require("imagemin-jpeg-recompress");
-const imageminPngquant = require("imagemin-pngquant");
 
 const {
     DIST_DIRECTORY,
@@ -44,36 +41,22 @@ lazyLoadTask(tasks.SCRIPTS, `${TASKS_DIRECTORY}/scripts`, {
     srcPath: `${SRC_DIRECTORY}/js/**/*.js`
 });
 
-gulp.task("images", () => {
-    return gulp
-        .src("src/assets/**/*.*", { since: gulp.lastRun("images") })
-        .pipe(
-            imagemin([
-                imageminPngquant({
-                    floyd: 0.3,
-                    quality: "30"
-                }),
-                imageminJpegRecompress({
-                    loops: 1,
-                    min: 50,
-                    max: 90,
-                    quality: "veryhigh"
-                })
-            ])
-        )
-        .pipe(gulp.dest("dist/assets"));
+lazyLoadTask(tasks.IMAGES, `${TASKS_DIRECTORY}/images`, {
+    distPath: `${DIST_DIRECTORY}/assets/img`,
+    isDev: IS_DEVELOPMENT,
+    srcPath: `${SRC_DIRECTORY}/assets/img/**/*.{png,jpeg,jpg}`
 });
 
-gulp.task("fonts", () => {
-    return gulp.src("src/fonts/**/*.*").pipe(gulp.dest("dist/fonts"));
-});
-
-gulp.task("vendor", () => {
-    return gulp.src("src/vendor/**/*.*").pipe(gulp.dest("dist/vendor"));
+lazyLoadTask(tasks.ASSETS, `${TASKS_DIRECTORY}/assets`, {
+    distPath: `${DIST_DIRECTORY}/assets`,
+    isDev: IS_DEVELOPMENT,
+    srcPath: [
+        `${SRC_DIRECTORY}/assets/{fonts,icons}/**/*.*`,
+        `${SRC_DIRECTORY}/fixtures/**/*.{png,jpeg,jpg}`
+    ]
 });
 
 gulp.task("default", () => {
-    // gulp.watch("./src/*.html", ["html"]);
     gulp.watch("src/less/**/*.less", ["styles"]);
     gulp.watch("src/js/**/*.js", ["scripts"]);
 });
