@@ -1,98 +1,98 @@
-const $ = require("jquery")
+const $ = require("jquery");
 
-$(document).ready(function() {
-	$.validator.addMethod('phone', function(value, elem) {
-		return /\+(\d{12})\b/.test(value);
-	}, 'Введите номер телефона в коректном формате');
+const PHONE_PATTERN = /\+(\d{12})\b/;
+const CYRILLIC_LETTERS_PATTERN = /^[\u0400-\u04FF]*$/;
 
-	$.validator.addMethod('cyrillic', function(value, elem) {
-		return /^[\u0400-\u04FF]*$/.test(value);
-	}, 'Только буквы');
+$(document).ready(() => {
+    $.validator.addMethod(
+        "phone",
+        value => PHONE_PATTERN.test(value),
+        "Введите номер телефона в коректном формате"
+    );
 
-	$.validator.setDefaults({
-		errorPlacement: function (err, elem) {
-			elem.attr("placeholder", err.text());
-		}
-	});
+    $.validator.addMethod(
+        "cyrillic",
+        value => CYRILLIC_LETTERS_PATTERN.test(value),
+        "Только буквы"
+    );
 
-	$('#review-form').validate({
-		rules: {
-			name: {
-				required: true,
-				minlength: 3,
-				cyrillic: true
-			},
+    $.validator.setDefaults({
+        errorPlacement: (err, elem) => elem.attr("placeholder", err.text())
+    });
 
-			comment: {
-				required: true,
-				minlength: 10,
-				cyrillic: true
-			},
-		},
+    $("#review-form").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 3,
+                cyrillic: true
+            },
 
-		messages: {
-			name: {
-				required: 'Укажите свое имя',
-				minlength: 'Не меньше 3 символов'
-			},
+            comment: {
+                required: true,
+                minlength: 10,
+                cyrillic: true
+            }
+        },
+        messages: {
+            name: {
+                required: "Укажите свое имя",
+                minlength: "Не меньше 3 символов"
+            },
 
-			comment: {
-				required: 'Напишите ваш комментарий',
-				minlength: 'Не меньше 10 символов',
-			}
-		},
-		
-		submitHandler: function(form) {
-    		alert("Ваша форма отправлена");
-  		}
-	});
+            comment: {
+                required: "Напишите ваш комментарий",
+                minlength: "Не меньше 10 символов"
+            }
+        },
+        submitHandler: () => {
+            alert("Ваша форма отправлена");
+        }
+    });
 
-	var callbackRules = {
-		rules: {
-			phone: {
-				required: true,
-				phone: true
-			},
+    const callbackRules = {
+        rules: {
+            phone: {
+                required: true,
+                phone: true
+            },
 
-			name: {
-				required: true,
-				minlength: 3,
-				cyrillic: true
-			}
-		},
+            name: {
+                required: true,
+                minlength: 3,
+                cyrillic: true
+            }
+        },
 
-		messages: {
-			name: {
-				required: 'Укажите свое имя',
-				minlength: 'Не меньше 3 символов'
-			},
+        messages: {
+            name: {
+                required: "Укажите свое имя",
+                minlength: "Не меньше 3 символов"
+            },
 
-			phone: {
-				required: 'Вы не ввели номер'
-			}
-		},
+            phone: {
+                required: "Вы не ввели номер"
+            }
+        },
+        submitHandler: () => alert("Ваша форма отправлена")
+    };
 
-		submitHandler: function(form) {
-    		alert("Ваша форма отправлена");
-  		}
-	};
+    $("#callback-form").validate(callbackRules);
+    $("#dive-form").validate(callbackRules);
 
-	$('#callback-form').validate(callbackRules);
-	$('#dive-form').validate(callbackRules);
+    $("#search").validate({
+        rules: {
+            query: {
+                required: true,
+                minlength: 5
+            }
+        },
 
-	$('#search').validate({
-		rules: {
-			query: {
-				required: true,
-				minlength: 5,
-			}
-		},
-		
-		messages: {
-			query: {
-				required: 'Введите запрос',
-				minlength: 'Не меньше 5 символов'
-			}
-		}
-	})
-})
+        messages: {
+            query: {
+                required: "Введите запрос",
+                minlength: "Не меньше 5 символов"
+            }
+        }
+    });
+});
