@@ -9,7 +9,8 @@ const createGallery = length => () => ({
     }))
 });
 
-const getRandomGallery = (galleriesQuantity, imagesInGallery) =>
-    createFixture(galleriesQuantity, createGallery(imagesInGallery));
+const getRandomGallery = (galleriesQuantity, imagesInGallery) => (
+    createFixture(galleriesQuantity, createGallery(imagesInGallery))
+);
 
 module.exports = getRandomGallery;
