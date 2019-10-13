@@ -1,19 +1,18 @@
 const path = require("path");
 const express = require("express");
 const exphbs = require("express-handlebars");
-
 require("dotenv").config();
+
+const { SRC_DIRECTORY } = require("./constants");
+
 const { PORT } = process.env;
 
 const app = express();
 
-const hbs = exphbs.create({
-    layoutsDir: path.join(__dirname, "src", "views", "layouts"),
-    partialsDir: path.join(__dirname, "src", "views", "partials")
-});
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
-
 app.use(express.static(path.join("dist")));
+
+app.engine(".hbs", exphbs({ extname: ".hbs" }));
+app.set("view engine", ".hbs");
+app.set("views", path.join(SRC_DIRECTORY, "views"));
 
 app.listen(PORT);
