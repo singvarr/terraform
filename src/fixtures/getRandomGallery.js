@@ -1,7 +1,7 @@
 const faker = require("faker");
 const createFixture = require("./createFixture");
 
-const createGallery = length => ({
+const createGallery = length => () => ({
     name: faker.name.title,
     images: createFixture(length, () => ({
         link: faker.internet.url,
@@ -9,8 +9,7 @@ const createGallery = length => ({
     }))
 });
 
-const getRandomGallery = (galleriesQuantity, imagesInGallery) => (
-    createFixture(galleriesQuantity, createGallery(imagesInGallery))
-);
+const getRandomGallery = (galleriesQuantity, imagesInGallery) =>
+    createFixture(galleriesQuantity, createGallery(imagesInGallery));
 
 module.exports = getRandomGallery;
