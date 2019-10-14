@@ -4,8 +4,8 @@ const createFixture = require("./createFixture");
 const createGallery = length => () => ({
     name: faker.name.title,
     images: createFixture(length, () => ({
-        link: faker.internet.url,
-        img: faker.image.technics
+        link: faker.internet.url(),
+        img: faker.image.technics()
     }))
 });
 
