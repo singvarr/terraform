@@ -1,4 +1,5 @@
 const $ = require("jquery");
+const stats = require("../fixtures");
 
 $(document).ready(() => {
     $(window).scroll(() => {
@@ -7,9 +8,10 @@ $(document).ready(() => {
             $(window).scrollTop() >
                 $(".counters").offset().top - $(window).height()
         ) {
-            $("#final").html(38);
-            $("#like").html(35);
-            $("#client").html(12);
+            stats.forEach(stat => {
+                const { id, quantity } = stat;
+                $(`$${id}`).html(quantity);
+            });
         }
     });
 });

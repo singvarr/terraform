@@ -1,8 +1,8 @@
 const faker = require("faker");
 
 const getRandomReview = () => ({
+    company: faker.company.companyName(),
     image: faker.image.abstract(),
-    name: faker.company.name(),
     review: faker.lorem.paragraph(),
     title: faker.name.jobTitle()
 });

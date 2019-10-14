@@ -1,0 +1,44 @@
+<footer class="footer" id="contacts">
+    <div class="footer__wrapper">
+        {{#with contacts}}
+        <div class="footer__contacts">
+            <div class="footer__contact-list">
+                <span>{{__ "footer.phone" mainPhone additionalPhone }}</span>
+                <span>{{__ "footer.email" email }}</span>
+            </div>
+            <div class="footer__company">
+                <img class="footer__logo" src="assets/logo.png">
+                <div>{{__ "footer.allRightsReserved"}}</div>
+                <div>{{__ "footer.company"}}</div>
+            </div>
+            <div class="footer__contacts-list">
+                <span>{{address}}</span>
+                <button class="footer__open-map" id="show-map">
+                    {{__ "footer.map.open"}}
+                </button>
+                <div id="map-container">
+                    <img src="assets/img/map.png">
+                    <button class="close">{{__ "footer.map.open"}}</button>
+                </div>
+            </div>
+        </div>
+        {{/with}}
+        <div class="footer__whale-form">
+            <img alt="whale" id="whale" src="assets/whale.png">
+            <button id='btn-dive-in'>
+                {{__ "footer.whaleForm.diveIn"}}
+            </button>
+            <form id="dive-form">
+                <input name="name" placeholder="{{__ "form.namePlaceholder"}}"
+                    type="text">
+                <input name="phone" placeholder="{{__ "form.phonePlaceholder"}}"
+                    type="text">
+                <button type="submit">{{__ "form.send"}}</button>
+                <button id="footer__dive-out">
+                    {{__ "footer.whaleForm.diveOut"}}
+                </button>
+            </form>
+        </div>
+        <div class="copyright">{{__ "footer.creator" developer}}</div>
+    </div>
+</footer>
