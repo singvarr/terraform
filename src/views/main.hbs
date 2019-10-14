@@ -1,13 +1,5 @@
 <main class="content">
-    <section class="portfolio">
-        <ul class="portfolio__container">
-            {{#each portfolio}}
-            <li>
-                <img src={{this}}>
-            </li>
-            {{/each}}
-        </ul>
-    </section>
+    {{> portfolio images=portfolio}}
     <section class="services" id="services">
         <div class="services__wrapper">
             <div class="content__title services__title">
