@@ -1,19 +1,19 @@
 const services = [
     {
-        name: "./sofa.png",
-        src: "3D визуализация интерьера"
+        translationKey: "services.visualizationInterior",
+        image: "./sofa.png"
     },
     {
-        name: "./house.png",
-        src: "3D визуализация экстерьера"
+        translationKey: "services.visualizationExterior",
+        image: "./house.png"
     },
     {
-        name: "./bear.png",
-        src: "3D моделирование"
+        translationKey: "services.modeling",
+        image: "./bear.png"
     },
     {
-        name: "./zombie.png",
-        src: "Интерактивная визуализация"
+        translationKey: "services.interactiveVisualization",
+        image: "./zombie.png"
     }
 ];
 
