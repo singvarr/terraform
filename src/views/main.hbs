@@ -1,0 +1,110 @@
+<main class="content">
+    <section class="portfolio">
+        <ul class="portfolio__container">
+            {{#each portfolio}}
+            <li>
+                <img src={{this}}>
+            </li>
+            {{/each}}
+        </ul>
+    </section>
+    <section class="services" id="services">
+        <div class="services__wrapper">
+            <div class="content__title services__title">
+                {{__ "navigation.services" }}
+            </div>
+            {{#each services}}
+            <div class="service">
+                <div class="service__image">
+                    <img src="{{this.image}}">
+                </div>
+                <div class="service__name">{{__ this.translationKey}}</div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+    <section class="team-section" id="about">
+        <div class="content__title team-section__title">
+            {{__ "navigation.about"}}
+        </div>
+        {{#each team}}
+        <div class="team-member">
+            <div class="team-member__photo">
+                <img src="{{this.img}}">
+            </div>
+            <div class="team-member__name">{{this.name}}</div>
+            <div class="team-member__title">{{this.title}}</div>
+        </div>
+        {{/each}}
+    </section>
+    <section class="works" id="portfolio">
+        <div class="works__wrapper">
+            <div class="content__title works__title">
+                {{__ "navigation.portfolio"}}
+            </div>
+            {{#each gallery}}
+            <div class="gallery">
+                <div class="gallery__title">{{this.name}}</div>
+                <div class="gallery__images">
+                    {{#each this.images}}
+                    <a href="{{this.link}}">
+                        <img src="{{this.img}}">
+                    </a>
+                    {{/each}}
+                </div>
+            </div>
+            {{/each}}
+            <a class="portfolio__view-all" href="/portfolio">
+                {{__ "portfolio.viewAll"}}
+            </a>
+        </div>
+    </section>
+    <section class="stats">
+        <div class="stats__wrapper">
+            {{#each stats}}
+            <div class="counter">
+                <div class="counter__stat" id="{{this.id}}"></div>
+                <div class="counter__caption">{{__ this.translationKey}}</div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+    <section class="partners" id="partners">
+        <div class="content__title partners__title">
+            {{__ "partners.title"}}
+        </div>
+        <div class="partners__list">
+            {{#each partners}}
+            <div class="partner">
+                <div class="partner__logo">
+                    <img src="{{this.image}}">
+                </div>
+                <div class="partner__name">{{this.name}}</div>
+            </div>
+            {{/each}}
+        </div>
+        <button class="partners__show">{{__ "partners.showAll"}}</button>
+    </section>
+    <section class="reviews wrapper">
+        <div class="content__title reviews__title">
+            {{__ "reviews.title"}}
+        </div>
+        <button id="reviews__add">{{__ "reviews.add"}}</button>
+        <div class="reviews__list">
+            {{#each reviews}}
+            <div class="review">
+                <div class="review__img">
+                    <img alt="{{this.company}}-logo" src="{{this.image}}">
+                </div>
+                <div class="review__content">
+                    <div class="review__reviewer">
+                        {{__ "reviews.companyRepresentative" this.company}}
+                    </div>
+                    <div class="review__title">{{this.title}}</div>
+                    <div class="review__text">{{this.review}}</div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+</main>
