@@ -1,19 +1,25 @@
+const pricing = require("./pricing");
+
 const services = [
     {
-        translationKey: "services.visualizationInterior",
-        image: "./sofa.png"
+        image: "./sofa.png",
+        pricing,
+        translationKey: "services.visualizationInterior"
     },
     {
-        translationKey: "services.visualizationExterior",
-        image: "./house.png"
+        image: "./house.png",
+        pricing,
+        translationKey: "services.visualizationExterior"
     },
     {
-        translationKey: "services.modeling",
-        image: "./bear.png"
+        image: "./bear.png",
+        pricing,
+        translationKey: "services.modeling"
     },
     {
-        translationKey: "services.interactiveVisualization",
-        image: "./zombie.png"
+        image: "./zombie.png",
+        pricing,
+        translationKey: "services.interactiveVisualization"
     }
 ];
 

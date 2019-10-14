@@ -1,6 +1,6 @@
 module.exports = {
-    BLOG: "pages.blog",
-    MAIN: "pages.main",
-    POST: "pages.post",
-    SERVICES: "pages.services"
+    BLOG: "head.titles.blog",
+    MAIN: "head.titles.main",
+    POST: "head.titles.post",
+    SERVICES: "head.titles.services"
 };

@@ -59,4 +59,15 @@ app.get("/", (_, res) => {
     });
 });
 
+app.get("/services", (_, res) => {
+    res.render("services", {
+        contacts,
+        developer: faker.name.findName(),
+        images: createFixture(10, faker.image.technics),
+        navigation,
+        services,
+        title: pageTitlesTranslations.SERVICES
+    });
+});
+
 app.listen(PORT);
