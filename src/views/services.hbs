@@ -1,0 +1,27 @@
+<main>
+    {{> portfolio }}
+    <section class="services">
+        {{#each services}}
+        <div class="service">
+            <div class="service__img">
+                <img src="{{this.image}}">
+            </div>
+            <div>{{__ this.translationKey}}</div>
+        </div>
+        <div class="service-plans">
+            <div class="service-plans__wrapper">
+                {{#each this.pricings}}
+                <div class="service-plan">
+                    <div class="service-plan__title">
+                        {{__ this.translationKey}}
+                    </div>
+                    <div class="service-plan__description">
+                        {{this.description}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/each}}
+    </section>
+</main>
