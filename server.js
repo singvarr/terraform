@@ -14,6 +14,7 @@ const {
     getRandomReview,
     getRandomWorker,
     menu: navigation,
+    pageTitlesTranslations,
     services,
     stats
 } = require("./src/fixtures");
@@ -41,5 +42,21 @@ const hbs = exphbs.create({
 app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
 app.set("views", path.join(SRC_DIRECTORY, "views"));
+
+app.get("/", (_, res) => {
+    res.render("main", {
+        contacts,
+        developer: faker.name.findName(),
+        gallery: getRandomGallery(4, 20),
+        navigation,
+        partners: createFixture(20, getRandomPartner),
+        portfolio: createFixture(10, faker.image.technics),
+        reviews: createFixture(30, getRandomReview),
+        services,
+        stats,
+        team: createFixture(4, getRandomWorker),
+        title: pageTitlesTranslations.MAIN
+    });
+});
 
 app.listen(PORT);
