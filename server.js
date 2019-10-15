@@ -70,4 +70,14 @@ app.get("/services", (_, res) => {
     });
 });
 
+app.get("/blog", (_, res) => {
+    res.render("blog", {
+        contacts,
+        developer: faker.name.findName(),
+        images: createFixture(10, faker.image.technics),
+        navigation,
+        title: pageTitlesTranslations.BLOG
+    });
+});
+
 app.listen(PORT);
