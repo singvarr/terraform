@@ -11,8 +11,13 @@ const {
     createFixture,
     getRandomGallery,
     getRandomPartner,
+    getRandomPortfolio,
+    getRandomPostContent,
+    getRandomPostPreview,
     getRandomReview,
+    getRandomTopic,
     getRandomWorker,
+    getWidgetContent,
     menu: navigation,
     pageTitlesTranslations,
     services,
@@ -70,13 +75,37 @@ app.get("/services", (_, res) => {
     });
 });
 
+app.get("/portfolio", (_, res) => {
+    res.render("portfolio", {
+        contacts,
+        developer: faker.name.findName(),
+        images: createFixture(10, faker.image.technics),
+        navigation,
+        portfolio: createFixture(4, getRandomPortfolio(4, 10)),
+        title: pageTitlesTranslations.PORTFOLIO
+    });
+});
+
 app.get("/blog", (_, res) => {
     res.render("blog", {
         contacts,
         developer: faker.name.findName(),
         images: createFixture(10, faker.image.technics),
         navigation,
-        title: pageTitlesTranslations.BLOG
+        newPosts: getWidgetContent(3, "widget.newPosts", getRandomPostPreview),
+        posts: createFixture(10, getRandomPostPreview),
+        title: pageTitlesTranslations.BLOG,
+        topics: getWidgetContent(3, "widget.topics", getRandomTopic)
+    });
+});
+
+app.get("/post", (_, res) => {
+    res.render("post", {
+        contacts,
+        developer: faker.name.findName(),
+        navigation,
+        post: getRandomPostContent(10),
+        title: pageTitlesTranslations.POST
     });
 });
 
