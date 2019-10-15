@@ -20,7 +20,6 @@ module.exports = options => {
 
         return gulp
             .src(srcPath)
-            .pipe($.watch(srcPath))
             .pipe(
                 $.if(
                     !isDev,

@@ -8,7 +8,6 @@ module.exports = function(options) {
     return function() {
         return gulp
             .src(srcPath)
-            .pipe($.watch(srcPath))
             .pipe($.if(isDev, $.sourcemaps.init()))
             .pipe($.less())
             .pipe(

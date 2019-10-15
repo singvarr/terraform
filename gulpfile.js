@@ -13,7 +13,9 @@ const tasks = {
     IMAGES: "images",
     LINT: "lint",
     SCRIPTS: "scripts",
-    STYLES: "styles"
+    START: "start",
+    STYLES: "styles",
+    WATCH: "watch"
 };
 
 function lazyLoadTask(taskName, path, options) {
@@ -73,3 +75,11 @@ gulp.task(
         )
     )
 );
+
+gulp.task(tasks.WATCH, () => {
+    gulp.watch("./src/assets/**/*.*", gulp.series(tasks.ASSETS));
+    gulp.watch("./src/js/**/*.js", gulp.parallel(tasks.LINT, tasks.SCRIPTS));
+    gulp.watch("./src/less/**/*.less", gulp.series(tasks.STYLES));
+});
+
+gulp.task(tasks.START, gulp.series(tasks.BUILD, tasks.WATCH));
