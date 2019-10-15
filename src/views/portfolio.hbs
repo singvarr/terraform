@@ -1,0 +1,22 @@
+<main>
+    {{> portfolio }}
+    <section class="portfolio">
+        {{#each portfolio}}
+        <div class="portfolio__wrapper">
+            <h2 class="portfolio__title">{{this.title}}</h2>
+            {{#each this.galleries}}
+            <div class="portfolio__gallery gallery">
+                <h3 class="gallery__title">{{this.name}}</h3>
+                <div class="gallery__container">
+                    {{#each this.images}}
+                    <a href="{{this.link}}">
+                        <img src="{{this.img}}">
+                    </a>
+                    {{/each}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{/each}}
+    </section>
+</main>

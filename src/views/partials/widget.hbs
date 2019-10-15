@@ -1,0 +1,12 @@
+<div class="widget">
+    <div class="widget__title">
+        {{__ widget.title }}
+    </div>
+    <ul class="widget__list">
+        {{#each widget.items}}
+        <li class="widget__item">
+            <a class="widget__link" href="{{this.slug}}">{{this.title}}</a>
+        </li>
+        {{/each}}
+    </ul>
+</div>

@@ -1,0 +1,12 @@
+{{> blog}}
+
+{{#*inline "page-title"}}
+<title>{{__ title post.title}}</title>
+{{/inline}}
+
+{{#*inline "blog-content"}}
+<article class="post">
+    <h1 class="post__title">{{post.title}}</h1>
+    <div class="post__content">{{post.content}}</div>
+</article>
+{{/inline}}
