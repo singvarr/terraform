@@ -1,3 +1,13 @@
-<aside>
-    This is aside block
+<aside class="sidebar">
+    <form class="search-form">
+        <div class="sidebar-form__title">{{__ "blog.search.title"}}</div>
+        <input
+            name="query"
+            placeholder="{{__ "blog.search.placeholder"}}"
+            type="search"
+        >
+        <button type="submit">{{__ "blog.search.submit"}}</button>
+    </form>
+    {{>widget widget=topics}}
+    {{>widget widget=newPosts}}
 </aside>
