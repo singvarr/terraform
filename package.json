@@ -49,7 +49,7 @@
     "express-handlebars": "^3.1.0",
     "faker": "^4.1.0",
     "handlebars-layouts": "^3.1.4",
-    "i": "^0.3.6",
+    "i18n": "^0.3.6",
     "imagemin-jpeg-recompress": "^6.0.0",
     "imagemin-pngquant": "^8.0.0",
     "jquery": "^3.4.1",
