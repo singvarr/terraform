@@ -104,8 +104,10 @@ app.get("/post", (_, res) => {
         contacts,
         developer: faker.name.findName(),
         navigation,
+        newPosts: getWidgetContent(3, "widget.newPosts", getRandomPostPreview),
         post: getRandomPostContent(10),
-        title: pageTitlesTranslations.POST
+        title: pageTitlesTranslations.POST,
+        topics: getWidgetContent(3, "widget.topics", getRandomTopic)
     });
 });
 
