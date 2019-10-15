@@ -1,0 +1,10 @@
+{{> blog }}
+{{#*inline "blog-content"}}
+
+    {{> portfolio }}
+    {{#*inline "portfolio-content"}}
+        <div class="portfolio__title"></div>
+    {{/inline}}
+
+    <section>This is main section content</section>
+{{/inline}}
