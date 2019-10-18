@@ -14,21 +14,20 @@ const jpegCompressConfig = {
     quality: "veryhigh"
 };
 
-module.exports = options => {
-    return () => {
-        const { distPath, isDev, srcPath } = options;
+module.exports = options => () => {
+    const { distPath, isDev, srcPath, taskName } = options;
 
-        return gulp
-            .src(srcPath)
-            .pipe(
-                $.if(
-                    !isDev,
-                    $.imagemin([
-                        imageminPngquant(pngCompressConfig),
-                        imageminJpegRecompress(jpegCompressConfig)
-                    ])
-                )
+    return gulp
+        .src(srcPath, { since: gulp.lastRun(taskName) })
+        .pipe($.newer(distPath))
+        .pipe(
+            $.if(
+                !isDev,
+                $.imagemin([
+                    imageminPngquant(pngCompressConfig),
+                    imageminJpegRecompress(jpegCompressConfig)
+                ])
             )
-            .pipe(gulp.dest(distPath));
-    };
+        )
+        .pipe(gulp.dest(distPath));
 };

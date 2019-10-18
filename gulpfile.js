@@ -1,4 +1,7 @@
+const path = require("path");
 const gulp = require("gulp");
+const $ = require("gulp-load-plugins");
+
 const {
     DIST_DIRECTORY,
     IS_DEVELOPMENT,
@@ -78,7 +81,15 @@ gulp.task(
 
 gulp.task(tasks.WATCH, () => {
     gulp.watch("./src/assets/**/*.*", gulp.series(tasks.ASSETS));
-    gulp.watch("./src/js/**/*.js", gulp.parallel(tasks.LINT, tasks.SCRIPTS));
+    gulp.watch("./src/js/**/*.js", gulp.parallel(tasks.LINT, tasks.SCRIPTS)).on(
+        "unlink",
+        file => {
+            const absolutePath = path.resolve(file);
+
+            delete $.cached.caches[tasks.LINT][absolutePath];
+            delete $.cached.caches[tasks.LINT][absolutePath];
+        }
+    );
     gulp.watch("./src/less/**/*.less", gulp.series(tasks.STYLES));
 });
 

@@ -1,11 +1,9 @@
 const gulp = require("gulp");
 
-module.exports = options => {
-    const { distPath, srcPath } = options;
+module.exports = options => () => {
+    const { distPath, srcPath, taskName } = options;
 
-    return () => {
-        return gulp
-            .src(srcPath)
-            .pipe(gulp.dest(distPath));
-    };
+    return gulp
+        .src(srcPath, { since: gulp.lastRun(taskName) })
+        .pipe(gulp.dest(distPath));
 };
