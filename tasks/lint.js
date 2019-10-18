@@ -3,9 +3,9 @@ const $ = require("gulp-load-plugins")();
 const combiner = require("stream-combiner2");
 
 module.exports = options => () => {
-    const { srcPath } = options;
+    const { src, taskName } = options;
 
     return gulp
-        .src(srcPath)
+        .src(src, { since: gulp.lastRun(taskName) })
         .pipe(combiner.obj($.eslint(), $.eslint.formatEach()));
 };

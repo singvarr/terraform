@@ -2,6 +2,7 @@ const gulp = require("gulp");
 const $ = require("gulp-load-plugins")();
 const imageminJpegRecompress = require("imagemin-jpeg-recompress");
 const imageminPngquant = require("imagemin-pngquant");
+const { isDevelopment } = require("../constants");
 
 const pngCompressConfig = {
     floyd: 0.3,
@@ -15,19 +16,19 @@ const jpegCompressConfig = {
 };
 
 module.exports = options => () => {
-    const { distPath, isDev, srcPath, taskName } = options;
+    const { dist, src, taskName } = options;
 
     return gulp
-        .src(srcPath, { since: gulp.lastRun(taskName) })
-        .pipe($.newer(distPath))
+        .src(src, { since: gulp.lastRun(taskName) })
+        .pipe($.newer(dist))
         .pipe(
             $.if(
-                !isDev,
+                !isDevelopment,
                 $.imagemin([
                     imageminPngquant(pngCompressConfig),
                     imageminJpegRecompress(jpegCompressConfig)
                 ])
             )
         )
-        .pipe(gulp.dest(distPath));
+        .pipe(gulp.dest(dist));
 };

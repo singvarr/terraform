@@ -1,20 +1,24 @@
 const gulp = require("gulp");
 const $ = require("gulp-load-plugins")();
 const combiner = require("stream-combiner2");
+const isDevelopment = require("../constants");
 
 module.exports = options => () => {
-    const { distPath, isDev, srcPath, taskName } = options;
+    const { dist, src, taskName } = options;
 
     return gulp
-        .src(srcPath, { since: gulp.lastRun(taskName) })
+        .src(src, { since: gulp.lastRun(taskName) })
         .pipe($.cached(taskName))
-        .pipe($.if(isDev, $.sourcemaps.init()))
+        .pipe($.if(isDevelopment, $.sourcemaps.init()))
         .pipe($.babel({ presets: ["@babel/env"] }))
         .pipe($.remember(taskName))
         .pipe($.concat("bundle.js"))
         .pipe(
-            $.if(!isDev, combiner.obj($.uglify(), $.rename({ suffix: ".min" })))
+            $.if(
+                !isDevelopment,
+                combiner.obj($.uglify(), $.rename({ suffix: ".min" }))
+            )
         )
-        .pipe($.if(isDev, $.sourcemaps.write()))
-        .pipe(gulp.dest(distPath));
+        .pipe($.if(isDevelopment, $.sourcemaps.write()))
+        .pipe(gulp.dest(dist));
 };

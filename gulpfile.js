@@ -1,69 +1,47 @@
-const path = require("path");
 const gulp = require("gulp");
-const $ = require("gulp-load-plugins");
+const del = require("del");
+require("dotenv").config();
 
-const {
-    DIST_DIRECTORY,
-    IS_DEVELOPMENT,
-    SRC_DIRECTORY,
-    TASKS_DIRECTORY
-} = require("./constants");
+const { paths, tasks } = require("./constants");
+const loadTask = require("./utils/loadTask");
 
-const tasks = {
-    ASSETS: "assets",
-    BUILD: "build",
-    CLEAN: "clean",
-    IMAGES: "images",
-    LINT: "lint",
-    SCRIPTS: "scripts",
-    START: "start",
-    STYLES: "styles",
-    WATCH: "watch"
-};
-
-function lazyLoadTask(taskName, path, options) {
-    options.taskName = taskName;
-
-    gulp.task(taskName, callback => {
-        const task = require(path);
-        const handler = task.call(this, options);
-
-        return handler(callback);
-    });
-}
-
-lazyLoadTask(tasks.ASSETS, `${TASKS_DIRECTORY}/assets`, {
-    distPath: `${DIST_DIRECTORY}/assets`,
-    isDev: IS_DEVELOPMENT,
-    srcPath: [
-        `${SRC_DIRECTORY}/assets/{fonts,icons}/**/*.*`,
-        `${SRC_DIRECTORY}/fixtures/**/*.{png,jpeg,jpg}`
-    ]
+loadTask("assets", {
+    dist: "assets",
+    src: [
+        `${paths.SRC_DIRECTORY}/assets/{fonts,icons}/**/*.*`,
+        `${paths.SRC_DIRECTORY}/fixtures/**/*.{png,jpeg,jpg}`
+    ],
+    taskName: tasks.ASSETS
 });
 
-lazyLoadTask(tasks.CLEAN, `${TASKS_DIRECTORY}/clean`, { path: DIST_DIRECTORY });
-
-lazyLoadTask(tasks.IMAGES, `${TASKS_DIRECTORY}/images`, {
-    distPath: `${DIST_DIRECTORY}/assets/img`,
-    isDev: IS_DEVELOPMENT,
-    srcPath: `${SRC_DIRECTORY}/assets/img/**/*.{png,jpeg,jpg}`
+loadTask("images", {
+    dist: "assets/img",
+    src: `${paths.SRC_DIRECTORY}/assets/img/**/*.{png,jpeg,jpg}`,
+    taskName: tasks.IMAGES
 });
 
-lazyLoadTask(tasks.LINT, `${TASKS_DIRECTORY}/lint`, {
-    srcPath: [__filename, `${SRC_DIRECTORY}/js/**/*.js`, "./tasks/*.js"]
+loadTask("lint", {
+    src: [__filename, `${paths.SRC_DIRECTORY}/js/**/*.js`, "./tasks/*.js"],
+    taskName: tasks.LINT
 });
 
-lazyLoadTask(tasks.SCRIPTS, `${TASKS_DIRECTORY}/scripts`, {
-    distPath: `${DIST_DIRECTORY}/js`,
-    isDev: IS_DEVELOPMENT,
-    srcPath: `${SRC_DIRECTORY}/js/**/*.js`
+loadTask("scripts", {
+    dist: "js",
+    src: `${paths.SRC_DIRECTORY}/js/**/*.js`,
+    taskName: tasks.SCRIPTS
 });
 
-lazyLoadTask(tasks.STYLES, `${TASKS_DIRECTORY}/styles`, {
-    distPath: `${DIST_DIRECTORY}/styles`,
-    isDev: IS_DEVELOPMENT,
-    srcPath: `${SRC_DIRECTORY}/less/**/*.less`
+loadTask("styles", {
+    dist: "styles",
+    src: `${paths.SRC_DIRECTORY}/less/**/*.less`,
+    taskName: tasks.STYLES
 });
+
+loadTask("nodemon", { extensions: "js hbs", server: "./server" });
+
+loadTask("browserSync")
+
+gulp.task(tasks.CLEAN, () => del(paths.DIST_DIRECTORY));
 
 gulp.task(
     tasks.BUILD,
@@ -79,17 +57,11 @@ gulp.task(
     )
 );
 
+gulp.task(tasks.SERVER, gulp.series(tasks.NODEMON, tasks.BROWSER_SYNC));
+
 gulp.task(tasks.WATCH, () => {
     gulp.watch("./src/assets/**/*.*", gulp.series(tasks.ASSETS));
-    gulp.watch("./src/js/**/*.js", gulp.parallel(tasks.LINT, tasks.SCRIPTS)).on(
-        "unlink",
-        file => {
-            const absolutePath = path.resolve(file);
-
-            delete $.cached.caches[tasks.LINT][absolutePath];
-            delete $.cached.caches[tasks.LINT][absolutePath];
-        }
-    );
+    gulp.watch("./src/js/**/*.js", gulp.parallel(tasks.LINT, tasks.SCRIPTS));
     gulp.watch("./src/less/**/*.less", gulp.series(tasks.STYLES));
 });
 
