@@ -2,7 +2,10 @@
 <html lang="ru">
 
 <head>
+    {{#> page-title}}
     <title>{{__ title}}</title>
+    {{/page-title}}
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="{{__ "head.meta.description"}}" name="description">
@@ -15,5 +18,10 @@
 
 <button id="go-up-btn"></button>
 <button id="callback-btn"></button>
+
+<button id="go-up-btn"></button>
+<button id="callback-btn"></button>
+
+{{> callbackForm}}
 
 </html>

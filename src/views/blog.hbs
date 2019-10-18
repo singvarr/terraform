@@ -1,0 +1,24 @@
+{{> blog}}
+{{#*inline "blog-content"}}
+
+{{> portfolio}}
+
+<section class="posts-list">
+    <div class="posts-list__wrapper">
+        {{#each posts}}
+        <a href="/{{this.slug}}" class="post">
+            <div class="post__preview">
+                <img src="{{this.image}}">
+            </div>
+            <div class="post__description">
+                <div class="post__title">{{this.title}}</div>
+                <div class="post__creation-date">{{this.date}}</div>
+                <div class="post__views">{{this.views}}</div>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+    <button class="posts-list__load-more">{{__ "posts.showMore"}}</button>
+</section>
+
+{{/inline}}
