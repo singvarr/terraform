@@ -8,8 +8,10 @@ module.exports = options => () => {
 
     return gulp
         .src(src, { since: gulp.lastRun(taskName) })
+        .pipe($.cached(taskName))
         .pipe($.if(isDevelopment, $.sourcemaps.init()))
         .pipe($.less())
+        .pipe($.remember(taskName))
         .pipe(
             $.if(
                 !isDevelopment,

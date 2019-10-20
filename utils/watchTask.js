@@ -1,13 +1,15 @@
-const path = require("path");
 const gulp = require("gulp");
 const $ = require("gulp-load-plugins");
 
-function watchTask(glob, task) {
-    gulp.watch(glob, gulp.series(task)).on("unlink", file => {
-        const absolutePath = path.resolve(file);
+function watchTask(glob, taskName) {
+    gulp.watch(glob, gulp.series(taskName)).on("change", event => {
+        const { path, type } = event;
 
-        delete $.cached().caches[task][absolutePath];
-        $.remember().forget(file);
+        if (type === "deleted") {
+            delete $.cached.caches[taskName][path];
+
+            $.remember.forget(taskName, path);
+        }
     });
 }
 

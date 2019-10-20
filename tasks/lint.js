@@ -7,5 +7,8 @@ module.exports = options => () => {
 
     return gulp
         .src(src, { since: gulp.lastRun(taskName) })
-        .pipe(combiner.obj($.eslint(), $.eslint.formatEach()));
+        .pipe($.cached(taskName))
+        .pipe(combiner.obj($.eslint(), $.eslint.formatEach()))
+        .pipe($.debug({ title: taskName }))
+        .pipe($.remember(taskName));
 };

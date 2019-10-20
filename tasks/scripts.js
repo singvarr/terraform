@@ -11,6 +11,7 @@ module.exports = options => () => {
         .pipe($.cached(taskName))
         .pipe($.if(isDevelopment, $.sourcemaps.init()))
         .pipe($.babel({ presets: ["@babel/env"] }))
+        .pipe($.if(isDevelopment, $.debug()))
         .pipe($.remember(taskName))
         .pipe($.concat("bundle.js"))
         .pipe(

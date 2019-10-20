@@ -4,19 +4,14 @@ const imageminJpegRecompress = require("imagemin-jpeg-recompress");
 const imageminPngquant = require("imagemin-pngquant");
 const { isDevelopment } = require("../constants");
 
-const pngCompressConfig = {
-    floyd: 0.3,
-    quality: "30"
-};
-const jpegCompressConfig = {
-    loops: 1,
-    min: 50,
-    max: 90,
-    quality: "veryhigh"
-};
-
 module.exports = options => () => {
-    const { dist, src, taskName } = options;
+    const {
+        dist,
+        jpegCompressConfig,
+        pngCompressConfig,
+        src,
+        taskName
+    } = options;
 
     return gulp
         .src(src, { since: gulp.lastRun(taskName) })
