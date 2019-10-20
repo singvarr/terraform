@@ -6,20 +6,15 @@
   "scripts": {
     "build": "gulp build",
     "lint": "gulp lint",
-    "start": "nodemon",
-    "server": "gulp server"
+    "start": "gulp"
   },
-  "keywords": [
-    "gulp",
-    "wordpress",
-    "theme",
-    "pet-project"
-  ],
+  "keywords": ["gulp", "pet-project"],
   "author": "Ihor Sokolov",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
+    "browser-sync": "^2.26.7",
     "del": "^5.0.0",
     "eslint": "^6.1.0",
     "gulp": "^4.0.2",
@@ -38,6 +33,7 @@
     "gulp-less": "^4.0.1",
     "gulp-load-plugins": "^2.0.0",
     "gulp-newer": "^1.4.0",
+    "gulp-nodemon": "^2.4.2",
     "gulp-remember": "^1.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-sourcemaps": "^2.6.5",
