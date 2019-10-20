@@ -1,47 +1,65 @@
 const gulp = require("gulp");
-const del = require("del");
 require("dotenv").config();
 
-const { paths, tasks } = require("./constants");
+const { globs, paths, tasks } = require("./constants");
 const loadTask = require("./utils/loadTask");
+const watchTask = require("./utils/watchTask");
+
+const { PORT, PROXY } = process.env;
 
 loadTask("assets", {
     dist: "assets",
-    src: [
-        `${paths.SRC_DIRECTORY}/assets/{fonts,icons}/**/*.*`,
-        `${paths.SRC_DIRECTORY}/fixtures/**/*.{png,jpeg,jpg}`
-    ],
+    src: globs.ASSETS,
     taskName: tasks.ASSETS
 });
 
 loadTask("images", {
     dist: "assets/img",
-    src: `${paths.SRC_DIRECTORY}/assets/img/**/*.{png,jpeg,jpg}`,
-    taskName: tasks.IMAGES
+    src: globs.IMAGES,
+    taskName: tasks.IMAGES,
+    jpegCompressConfig: {
+        loops: 1,
+        min: 50,
+        max: 90,
+        quality: "veryhigh"
+    },
+    pngCompressConfig: {
+        floyd: 0.3,
+        quality: "30"
+    }
 });
 
-loadTask("lint", {
-    src: [__filename, `${paths.SRC_DIRECTORY}/js/**/*.js`, "./tasks/*.js"],
-    taskName: tasks.LINT
-});
+loadTask("lint", { src: globs.ALL_JS, taskName: tasks.LINT });
 
 loadTask("scripts", {
     dist: "js",
-    src: `${paths.SRC_DIRECTORY}/js/**/*.js`,
+    src: globs.JS,
     taskName: tasks.SCRIPTS
 });
 
 loadTask("styles", {
     dist: "styles",
-    src: `${paths.SRC_DIRECTORY}/less/**/*.less`,
+    src: globs.LESS,
     taskName: tasks.STYLES
 });
 
-loadTask("nodemon", { extensions: "js hbs", server: "./server" });
+loadTask("nodemon", {
+    extensions: "js hbs",
+    script: "./server",
+    taskName: tasks.NODEMON
+});
 
-loadTask("browserSync")
+loadTask("browserSync", {
+    glob: globs.STATIC,
+    port: PROXY,
+    proxy: PORT,
+    taskName: tasks.BROWSER_SYNC
+});
 
-gulp.task(tasks.CLEAN, () => del(paths.DIST_DIRECTORY));
+loadTask("clean", {
+    taskName: tasks.CLEAN,
+    folder: paths.DIST_DIRECTORY
+});
 
 gulp.task(
     tasks.BUILD,
@@ -57,12 +75,16 @@ gulp.task(
     )
 );
 
-gulp.task(tasks.SERVER, gulp.series(tasks.NODEMON, tasks.BROWSER_SYNC));
+gulp.task(tasks.SERVER, gulp.parallel(tasks.NODEMON, tasks.BROWSER_SYNC));
 
 gulp.task(tasks.WATCH, () => {
-    gulp.watch("./src/assets/**/*.*", gulp.series(tasks.ASSETS));
-    gulp.watch("./src/js/**/*.js", gulp.parallel(tasks.LINT, tasks.SCRIPTS));
-    gulp.watch("./src/less/**/*.less", gulp.series(tasks.STYLES));
+    watchTask(globs.ASSETS, tasks.ASSETS);
+    watchTask(globs.JS, tasks.SCRIPTS);
+    watchTask(globs.LESS, tasks.STYLES);
+    watchTask(globs.ALL_JS, tasks.LINT);
 });
 
-gulp.task(tasks.START, gulp.series(tasks.BUILD, tasks.WATCH));
+gulp.task(
+    tasks.DEFAULT,
+    gulp.series(tasks.BUILD, gulp.parallel(tasks.WATCH, tasks.SERVER))
+);
