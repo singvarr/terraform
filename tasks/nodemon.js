@@ -1,10 +1,14 @@
-const $ = require("gulp-load-plugins")();
+const nodemon = require("gulp-nodemon");
+const browserSync = require("browser-sync");
 
-module.exports = options => {
-    const { extensions, server } = options;
+module.exports = options => done => {
+    const { extensions, script } = options;
 
-    return $.nodemon({
+    const server = nodemon({
+        done,
         ext: extensions,
-        script: server
-    });
+        script
+    }).on("start", browserSync.reload);
+
+    return server;
 };
