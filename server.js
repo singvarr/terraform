@@ -3,9 +3,8 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const i18n = require("i18n");
 const faker = require("faker");
-require("dotenv").config();
 
-const { DIST_DIRECTORY, SRC_DIRECTORY } = require("./constants");
+const { paths } = require("./constants");
 const {
     contacts,
     createFixture,
@@ -28,11 +27,11 @@ const { PORT } = process.env;
 
 const app = express();
 
-app.use(express.static(DIST_DIRECTORY));
+app.use(express.static(paths.DIST_DIRECTORY));
 
 i18n.configure({
     defaultLocale: "ru",
-    directory: path.join(SRC_DIRECTORY, "locales")
+    directory: path.join(paths.SRC_DIRECTORY, "locales")
 });
 app.use(i18n.init);
 
@@ -46,7 +45,11 @@ const hbs = exphbs.create({
 });
 app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
-app.set("views", path.join(SRC_DIRECTORY, "views"));
+app.set("views", path.join(paths.SRC_DIRECTORY, "views"));
+
+app.get("/favicon.ico", (_, res) => {
+    res.sendStatus(204);
+});
 
 app.get("/", (_, res) => {
     res.render("main", {
