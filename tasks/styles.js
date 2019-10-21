@@ -13,7 +13,6 @@ module.exports = options => () => {
         .pipe($.cached(taskName))
         .pipe($.if(isDevelopment, $.sourcemaps.init()))
         .pipe($.less())
-        .pipe($.remember(taskName))
         .pipe(
             $.if(
                 !isDevelopment,

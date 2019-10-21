@@ -9,6 +9,5 @@ module.exports = options => () => {
         .src(src, { since: gulp.lastRun(taskName) })
         .pipe($.newer(dist))
         .pipe($.if(isDevelopment, $.debug({ title: taskName })))
-        .pipe($.cached(taskName))
         .pipe(gulp.dest(dist));
 };
