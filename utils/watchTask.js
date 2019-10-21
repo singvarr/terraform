@@ -1,16 +1,16 @@
 const gulp = require("gulp");
-const $ = require("gulp-load-plugins");
+const $ = require("gulp-load-plugins")();
 
 function watchTask(glob, taskName) {
-    gulp.watch(glob, gulp.series(taskName)).on("change", event => {
-        const { path, type } = event;
+    const watcher = gulp.watch(glob, gulp.series(taskName));
 
-        if (type === "deleted") {
-            delete $.cached.caches[taskName][path];
+    watcher.on("unlink", path => {
 
-            $.remember.forget(taskName, path);
-        }
+        delete $.cached.caches[taskName][path];
+        $.remember.forget(taskName, path);
     });
+
+    return watcher;
 }
 
 module.exports = watchTask;
