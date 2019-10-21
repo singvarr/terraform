@@ -78,7 +78,7 @@ gulp.task(tasks.BUILD, gulp.series(tasks.CLEAN, tasks.STATIC));
 gulp.task(tasks.WATCH, () => {
     watchTask(globs.ASSETS, tasks.ASSETS);
     watchTask(globs.JS, tasks.SCRIPTS);
-    watchTask(globs.LESS, tasks.STYLES);
+    watchTask(globs.LESS, tasks.STYLES, { source: ".less", target: ".css" });
     watchTask(globs.ALL_JS, tasks.LINT);
 });
 
