@@ -34,6 +34,7 @@ loadTask("lint", { src: globs.ALL_JS, taskName: tasks.LINT });
 loadTask("scripts", {
     dist: "js",
     src: globs.JS,
+    output: "bundle.js",
     taskName: tasks.SCRIPTS
 });
 
@@ -62,20 +63,17 @@ loadTask("clean", {
 });
 
 gulp.task(
-    tasks.BUILD,
-    gulp.series(
-        tasks.CLEAN,
-        gulp.parallel(
-            tasks.ASSETS,
-            tasks.IMAGES,
-            tasks.LINT,
-            tasks.SCRIPTS,
-            tasks.STYLES
-        )
+    tasks.STATIC,
+    gulp.parallel(
+        tasks.ASSETS,
+        tasks.IMAGES,
+        tasks.LINT,
+        tasks.SCRIPTS,
+        tasks.STYLES
     )
 );
 
-gulp.task(tasks.SERVER, gulp.parallel(tasks.NODEMON, tasks.BROWSER_SYNC));
+gulp.task(tasks.BUILD, gulp.series(tasks.CLEAN, tasks.STATIC));
 
 gulp.task(tasks.WATCH, () => {
     watchTask(globs.ASSETS, tasks.ASSETS);
@@ -86,5 +84,8 @@ gulp.task(tasks.WATCH, () => {
 
 gulp.task(
     tasks.DEFAULT,
-    gulp.series(tasks.BUILD, gulp.parallel(tasks.WATCH, tasks.SERVER))
+    gulp.series(
+        tasks.STATIC,
+        gulp.parallel(tasks.WATCH, tasks.NODEMON, tasks.BROWSER_SYNC)
+    )
 );
