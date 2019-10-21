@@ -8,6 +8,8 @@ module.exports = options => () => {
 
     return gulp
         .src(src, { since: gulp.lastRun(taskName) })
+        .pipe($.newer({ dest: dist, ext: ".css" }))
+        .pipe($.if(isDevelopment, $.debug({ title: taskName })))
         .pipe($.cached(taskName))
         .pipe($.if(isDevelopment, $.sourcemaps.init()))
         .pipe($.less())

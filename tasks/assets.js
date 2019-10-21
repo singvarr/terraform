@@ -7,7 +7,8 @@ module.exports = options => () => {
 
     return gulp
         .src(src, { since: gulp.lastRun(taskName) })
-        .pipe($.if(isDevelopment, $.debug()))
+        .pipe($.newer(dist))
+        .pipe($.if(isDevelopment, $.debug({ title: taskName })))
         .pipe($.cached(taskName))
         .pipe(gulp.dest(dist));
 };

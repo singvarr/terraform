@@ -16,6 +16,7 @@ module.exports = options => () => {
     return gulp
         .src(src, { since: gulp.lastRun(taskName) })
         .pipe($.newer(dist))
+        .pipe($.if(isDevelopment, $.debug({ title: taskName })))
         .pipe(
             $.if(
                 !isDevelopment,

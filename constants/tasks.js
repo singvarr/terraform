@@ -9,6 +9,7 @@ module.exports = {
     NODEMON: "nodemon",
     SCRIPTS: "scripts",
     SERVER: "server",
+    STATIC: "static",
     STYLES: "styles",
     WATCH: "watch"
 };
