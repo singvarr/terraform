@@ -4,7 +4,7 @@ module.exports = {
     ALL_JS: [
         `${paths.ROOT_PATH}/**/*.js`,
         "!node_modules/**",
-        `!${paths.DIST_DIRECTORY}`
+        `!${paths.DIST_DIRECTORY}/**`
     ],
     ASSETS: `${paths.SRC_DIRECTORY}/assets/{fonts,icons}/**/*.*`,
     IMAGES: `${paths.SRC_DIRECTORY}/fixtures/**/*.{png,jpeg,jpg}`,
