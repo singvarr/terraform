@@ -8,7 +8,10 @@
     "lint": "gulp lint",
     "start": "gulp"
   },
-  "keywords": ["gulp", "pet-project"],
+  "keywords": [
+    "gulp",
+    "pet-project"
+  ],
   "author": "Ihor Sokolov",
   "license": "ISC",
   "devDependencies": {
@@ -37,6 +40,7 @@
     "gulp-remember": "^1.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-sourcemaps": "^2.6.5",
+    "gulp-stylus": "^2.7.0",
     "gulp-uglify": "^3.0.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",

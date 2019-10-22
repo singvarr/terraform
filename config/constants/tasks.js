@@ -10,6 +10,6 @@ module.exports = {
     SCRIPTS: "scripts",
     SERVER: "server",
     STATIC: "static",
-    STYLES: "styles",
+    STYLUS: "stylus",
     WATCH: "watch"
 };

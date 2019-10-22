@@ -56,10 +56,10 @@ loadTask("nodemon", {
     taskName: tasks.NODEMON
 });
 
-loadTask("styles", {
+loadTask("stylus", {
     dist: "styles",
-    src: globs.LESS,
-    taskName: tasks.STYLES
+    src: globs.STYLUS,
+    taskName: tasks.STYLUS
 });
 
 gulp.task(
@@ -69,7 +69,7 @@ gulp.task(
         tasks.IMAGES,
         tasks.LINT,
         tasks.SCRIPTS,
-        tasks.STYLES
+        tasks.STYLUS
     )
 );
 
@@ -78,7 +78,7 @@ gulp.task(tasks.BUILD, gulp.series(tasks.CLEAN, tasks.STATIC));
 gulp.task(tasks.WATCH, () => {
     watchTask(globs.ASSETS, tasks.ASSETS);
     watchTask(globs.JS, tasks.SCRIPTS, true);
-    watchTask(globs.LESS, tasks.STYLES);
+    watchTask(globs.STYLUS, tasks.STYLUS);
     watchTask(globs.ALL_JS, tasks.LINT);
 });
 

@@ -13,5 +13,6 @@ module.exports = {
         `!${paths.SRC_DIRECTORY}/fixtures/**`
     ],
     LESS: `${paths.SRC_DIRECTORY}/less/**/*.less`,
-    STATIC: `${paths.SRC_DIRECTORY}/**/*.*`
+    STATIC: `${paths.SRC_DIRECTORY}/**/*.*`,
+    STYLUS: `${paths.SRC_DIRECTORY}/styles/**/*.styl`
 };
