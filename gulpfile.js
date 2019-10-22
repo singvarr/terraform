@@ -13,6 +13,18 @@ loadTask("assets", {
     taskName: tasks.ASSETS
 });
 
+loadTask("browserSync", {
+    glob: globs.STATIC,
+    port: PROXY,
+    proxy: PORT,
+    taskName: tasks.BROWSER_SYNC
+});
+
+loadTask("clean", {
+    taskName: tasks.CLEAN,
+    folder: paths.DIST_DIRECTORY
+});
+
 loadTask("images", {
     dist: "assets/img",
     src: globs.IMAGES,
@@ -38,28 +50,16 @@ loadTask("scripts", {
     taskName: tasks.SCRIPTS
 });
 
-loadTask("styles", {
-    dist: "styles",
-    src: globs.LESS,
-    taskName: tasks.STYLES
-});
-
 loadTask("nodemon", {
     extensions: "js hbs",
     script: "./server",
     taskName: tasks.NODEMON
 });
 
-loadTask("browserSync", {
-    glob: globs.STATIC,
-    port: PROXY,
-    proxy: PORT,
-    taskName: tasks.BROWSER_SYNC
-});
-
-loadTask("clean", {
-    taskName: tasks.CLEAN,
-    folder: paths.DIST_DIRECTORY
+loadTask("styles", {
+    dist: "styles",
+    src: globs.LESS,
+    taskName: tasks.STYLES
 });
 
 gulp.task(
