@@ -4,13 +4,5 @@
     "printWidth": 80,
     "singleQuote": false,
     "bracketSpacing": true,
-    "trailingComma": "none",
-    "overrides": [
-        {
-            "files": "*.less",
-            "options": {
-                "parser": "less"
-            }
-        }
-    ]
+    "trailingComma": "none"
 }
