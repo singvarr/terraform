@@ -4,7 +4,7 @@ const exphbs = require("express-handlebars");
 const i18n = require("i18n");
 const faker = require("faker");
 
-const { paths } = require("./constants");
+const { paths } = require("./config/constants");
 const {
     contacts,
     createFixture,

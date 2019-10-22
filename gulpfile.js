@@ -1,9 +1,9 @@
 const gulp = require("gulp");
 require("dotenv").config();
 
-const { globs, paths, tasks } = require("./constants");
-const loadTask = require("./utils/loadTask");
-const watchTask = require("./utils/watchTask");
+const { globs, paths, tasks } = require("./config/constants");
+const loadTask = require("./config/utils/loadTask");
+const watchTask = require("./config/utils/watchTask");
 
 const { PORT, PROXY } = process.env;
 
