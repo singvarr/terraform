@@ -45,7 +45,7 @@
   "dependencies": {
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
+    "express-handlebars": "^5.3.1",
     "faker": "^4.1.0",
     "i18n": "^0.3.6",
     "imagemin-jpeg-recompress": "^6.0.0",
